@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "crates/fastchunk-core"
+]
+resolver = "2"
