@@ -3,22 +3,28 @@ import importlib.metadata
 import subprocess
 import sys
 
+from fastchunk import RecursiveCharacterTextSplitter as FastSplitter
+
 def get_rust_chunks(text, chunk_size, chunk_overlap, keep_sep, strip_ws, separators):
-    sep_str = "default" if separators is None else json.dumps(separators)
-    cmd = [
-        "target/debug/harness",
-        text,
-        str(chunk_size),
-        str(chunk_overlap),
-        keep_sep,
-        str(strip_ws).lower(),
-        sep_str
-    ]
-    res = subprocess.run(cmd, capture_output=True, text=True)
-    if res.returncode != 0:
-        print(f"Rust panicked: {res.stderr}")
-        return None
-    return json.loads(res.stdout)
+    kwargs = {
+        "chunk_size": chunk_size,
+        "chunk_overlap": chunk_overlap,
+        "strip_whitespace": strip_ws,
+    }
+    if separators is not None:
+        kwargs["separators"] = separators
+
+    if keep_sep == "true":
+        kwargs["keep_separator"] = True
+    elif keep_sep == "false":
+        kwargs["keep_separator"] = False
+    elif keep_sep == "start":
+        kwargs["keep_separator"] = "start"
+    elif keep_sep == "end":
+        kwargs["keep_separator"] = "end"
+
+    fs = FastSplitter(**kwargs)
+    return fs.split_text(text)
 
 try:
     import langchain_text_splitters as ts

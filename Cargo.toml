@@ -1,5 +1,6 @@
 [workspace]
 members = [
-    "crates/fastchunk-core"
+    "crates/fastchunk-core",
+    "crates/fastchunk-python"
 ]
 resolver = "2"
