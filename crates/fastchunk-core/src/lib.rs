@@ -74,16 +74,7 @@ impl RecursiveCharacterTextSplitter {
         let mut final_chunks: Vec<String> = Vec::new();
         let separators: Vec<&str> = self.separators.iter().map(|s| s.as_str()).collect();
         self._split_text(text, &separators, &mut final_chunks);
-
-        if self.strip_whitespace {
-            final_chunks
-                .into_iter()
-                .map(|s| s.trim().to_string())
-                .filter(|s| !s.is_empty())
-                .collect()
-        } else {
-            final_chunks
-        }
+        final_chunks
     }
 
     fn _split_text(&self, text: &str, separators: &[&str], final_chunks: &mut Vec<String>) {
@@ -263,8 +254,9 @@ impl RecursiveCharacterTextSplitter {
             };
 
             if total_len > self.chunk_size && !current_chunks.is_empty() {
-                let joined = self._join_docs(&current_chunks, separator);
-                final_chunks.push(joined);
+                if let Some(joined) = self._join_docs(&current_chunks, separator) {
+                    final_chunks.push(joined);
+                }
 
                 while !current_chunks.is_empty() {
                     let mut overlap_len = 0;
@@ -301,18 +293,34 @@ impl RecursiveCharacterTextSplitter {
         }
 
         if !current_chunks.is_empty() {
-            let joined = self._join_docs(&current_chunks, separator);
-            final_chunks.push(joined);
+            if let Some(joined) = self._join_docs(&current_chunks, separator) {
+                final_chunks.push(joined);
+            }
         }
 
         final_chunks
     }
 
-    fn _join_docs(&self, docs: &[String], separator: &str) -> String {
-        if self.keep_separator == KeepSeparator::False {
+    fn _join_docs(&self, docs: &[String], separator: &str) -> Option<String> {
+        let text = if self.keep_separator == KeepSeparator::False {
             docs.join(separator)
         } else {
             docs.join("")
+        };
+
+        let final_text = if self.strip_whitespace {
+            text.trim().to_string()
+        } else {
+            text.clone()
+        };
+
+        #[allow(clippy::if_same_then_else)]
+        if self.strip_whitespace && final_text.is_empty() && !text.is_empty() {
+            None
+        } else if final_text.is_empty() && text.is_empty() {
+            None
+        } else {
+            Some(final_text)
         }
     }
 }
