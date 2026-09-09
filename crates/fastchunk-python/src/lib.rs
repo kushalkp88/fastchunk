@@ -101,10 +101,146 @@ impl RecursiveCharacterTextSplitter {
     fn split_text(&self, text: &str) -> PyResult<Vec<String>> {
         Ok(self.inner.split_text(text))
     }
+
+    #[pyo3(signature = (texts, metadatas=None))]
+    fn create_documents(
+        &self,
+        py: Python<'_>,
+        texts: Vec<String>,
+        metadatas: Option<Vec<PyObject>>,
+    ) -> PyResult<Vec<Document>> {
+        let copy_module = py.import_bound("copy")?;
+        let deepcopy = copy_module.getattr("deepcopy")?;
+
+        let metadatas_vec: Option<Vec<PyObject>> = if let Some(meta_list) = metadatas {
+            Some(meta_list)
+        } else {
+            None
+        };
+
+        let mut documents = Vec::new();
+
+        for (i, text) in texts.iter().enumerate() {
+            let chunks = self.inner.split_text(text);
+            let meta_to_copy = match &metadatas_vec {
+                Some(list) if i < list.len() => list[i].clone_ref(py),
+                _ => py.eval_bound("{}", None, None)?.into_any().unbind(),
+            };
+
+            for chunk in chunks {
+                let copied_meta = deepcopy.call1((meta_to_copy.clone_ref(py),))?.into_any().unbind();
+                documents.push(Document {
+                    page_content: chunk,
+                    metadata: copied_meta,
+                });
+            }
+        }
+
+        Ok(documents)
+    }
+
+    fn split_documents(&self, py: Python<'_>, documents: &Bound<'_, PyAny>) -> PyResult<Vec<Document>> {
+        let mut texts = Vec::new();
+        let mut metadatas = Vec::new();
+
+        for doc in documents.iter()? {
+            let doc = doc?;
+            let page_content: String = if let Ok(content) = doc.getattr("page_content") {
+                content.extract()?
+            } else if let Ok(dict) = doc.downcast::<pyo3::types::PyDict>() {
+                if let Some(content) = dict.get_item("page_content")? {
+                    content.extract()?
+                } else {
+                    return Err(PyValueError::new_err(
+                        "Document dictionary must contain 'page_content'",
+                    ));
+                }
+            } else {
+                return Err(PyValueError::new_err(
+                    "Document object must have 'page_content' attribute or key",
+                ));
+            };
+
+            let metadata: PyObject = if let Ok(meta) = doc.getattr("metadata") {
+                meta.into_any().unbind()
+            } else if let Ok(dict) = doc.downcast::<pyo3::types::PyDict>() {
+                if let Some(meta) = dict.get_item("metadata")? {
+                    meta.into_any().unbind()
+                } else {
+                    py.eval_bound("{}", None, None)?.into_any().unbind()
+                }
+            } else {
+                py.eval_bound("{}", None, None)?.into_any().unbind()
+            };
+
+            texts.push(page_content);
+            metadatas.push(metadata);
+        }
+
+        self.create_documents(py, texts, Some(metadatas))
+    }
+}
+
+#[pyclass]
+#[derive(Clone)]
+pub struct Document {
+    #[pyo3(get, set)]
+    pub page_content: String,
+    #[pyo3(get, set)]
+    pub metadata: PyObject,
+}
+
+#[pymethods]
+impl Document {
+    #[new]
+    #[pyo3(signature = (page_content, metadata=None))]
+    fn new(py: Python<'_>, page_content: String, metadata: Option<PyObject>) -> PyResult<Self> {
+        let meta = match metadata {
+            Some(m) => m,
+            None => py.eval_bound("{}", None, None)?.into_any().unbind(),
+        };
+        Ok(Self {
+            page_content,
+            metadata: meta,
+        })
+    }
+
+    fn __repr__(&self, py: Python<'_>) -> PyResult<String> {
+        let meta_repr = self.metadata.bind(py).repr()?.extract::<String>()?;
+        Ok(format!(
+            "Document(page_content={:?}, metadata={})",
+            self.page_content, meta_repr
+        ))
+    }
+
+    fn __eq__(&self, other: &Bound<'_, PyAny>, py: Python<'_>) -> PyResult<bool> {
+        if let Ok(other_doc) = other.extract::<PyRef<'_, Document>>() {
+            if self.page_content != other_doc.page_content {
+                return Ok(false);
+            }
+            let eq = self.metadata.bind(py).eq(other_doc.metadata.bind(py))?;
+            return Ok(eq);
+        }
+
+        // Duck typing comparison: check page_content and metadata attributes if present
+        if let Ok(other_content) = other.getattr("page_content") {
+            let content_str: String = other_content.extract()?;
+            if self.page_content != content_str {
+                return Ok(false);
+            }
+            if let Ok(other_meta) = other.getattr("metadata") {
+                let eq = self.metadata.bind(py).eq(other_meta)?;
+                return Ok(eq);
+            }
+        }
+
+        Ok(false)
+    }
 }
 
 #[pymodule]
 fn fastchunk(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<RecursiveCharacterTextSplitter>()?;
+    m.add_class::<Document>()?;
     Ok(())
 }
