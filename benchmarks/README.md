@@ -7,9 +7,11 @@ This directory contains the performance testing infrastructure for FastChunk.
 Ensure you are using the development virtual environment containing both the `fastchunk` PyO3 bindings and `pytest-benchmark`.
 
 ```bash
-source .venv2/bin/activate
-pip install pytest-benchmark langchain-text-splitters==1.1.2 semantic-text-splitter
-pytest benchmarks/python_benchmark.py
+# Set up the environment using uv
+uv sync
+
+# Run the benchmark suite
+uv run pytest benchmarks/python_benchmark.py
 ```
 
 ## Results

@@ -6,11 +6,23 @@ The `fastchunk-python` crate provides the FFI boundary, keeping the Python-speci
 
 ## Development Setup
 
+FastChunk uses [uv](https://docs.astral.sh/uv/) as its standard Python environment and package manager. Do not use Conda or global environments.
+
 To build and test the Python bindings locally:
 
-1. Create and activate a virtual environment.
-2. Install `maturin` and `pytest`.
-3. Build the developer wheel and install it into the current virtual environment using `maturin develop`.
+```bash
+# 1. Create and activate a Python 3.12 virtual environment with uv
+uv venv
+source .venv/bin/activate
+
+# 2. Sync dependencies and build the editable extension
+uv sync
+# Or manually build the extension:
+maturin develop
+
+# 3. Run the Python unit tests
+uv run pytest
+```
 
 ## Python API Usage
 
