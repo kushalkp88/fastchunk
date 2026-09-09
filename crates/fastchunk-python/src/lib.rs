@@ -387,5 +387,101 @@ sys.modules["fastchunk.llamaindex"] = llamaindex_submod
     let llamaindex_submod = sys_modules.get_item("fastchunk.llamaindex")?;
     m.setattr("llamaindex", llamaindex_submod)?;
 
+    let agno_code = r#"
+import sys
+import types
+
+class _AgnoSubmodule(types.ModuleType):
+    def __getattr__(self, name):
+        if name == "FastChunking":
+            try:
+                from agno.knowledge.chunking.strategy import ChunkingStrategy
+                from agno.knowledge.document.base import Document
+            except ImportError:
+                raise ImportError(
+                    "agno is required to use fastchunk.agno. "
+                    "Please install it with `pip install agno`."
+                ) from None
+
+            import fastchunk
+
+            class FastChunking(ChunkingStrategy):
+                """High-performance Agno ChunkingStrategy backed by FastChunk's Rust core."""
+
+                def __init__(
+                    self,
+                    chunk_size: int = 1000,
+                    overlap: int = 200,
+                    separators: list[str] | None = None,
+                    keep_separator: bool | str = True,
+                    is_separator_regex: bool = False,
+                    strip_whitespace: bool = True,
+                    **kwargs,
+                ):
+                    if "tokenizer" in kwargs and kwargs["tokenizer"] is not None:
+                        raise NotImplementedError(
+                            "Custom tokenizers/length_functions are not supported in FastChunking. "
+                            "FastChunk calculates lengths in compiled Rust using standard character length."
+                        )
+                    if "length_function" in kwargs and kwargs["length_function"] is not None:
+                        raise NotImplementedError(
+                            "Custom length_functions are not supported in FastChunking. "
+                            "FastChunk calculates lengths in compiled Rust using standard character length."
+                        )
+
+                    self.chunk_size = chunk_size
+                    self.overlap = overlap
+                    self._fastchunk_splitter = fastchunk.RecursiveCharacterTextSplitter(
+                        chunk_size=chunk_size,
+                        chunk_overlap=overlap,
+                        separators=separators,
+                        keep_separator=keep_separator,
+                        is_separator_regex=is_separator_regex,
+                        strip_whitespace=strip_whitespace,
+                    )
+
+                def split_text(self, text: str) -> list[str]:
+                    return self._fastchunk_splitter.split_text(text)
+
+                def chunk(self, document: Document) -> list[Document]:
+                    if not document.content:
+                        return []
+                    if len(document.content) <= self.chunk_size:
+                        return [document]
+
+                    import copy
+
+                    chunks_text = self._fastchunk_splitter.split_text(document.content)
+                    chunked_docs = []
+                    chunk_meta_data = document.meta_data or {}
+
+                    for chunk_number, text_chunk in enumerate(chunks_text, start=1):
+                        meta_data = copy.deepcopy(chunk_meta_data)
+                        meta_data["chunk"] = chunk_number
+                        meta_data["chunk_size"] = len(text_chunk)
+                        chunk_id = self._generate_chunk_id(document, chunk_number, text_chunk)
+                        chunked_docs.append(
+                            Document(
+                                id=chunk_id,
+                                name=document.name,
+                                meta_data=meta_data,
+                                content=text_chunk,
+                            )
+                        )
+                    return chunked_docs
+
+            self.FastChunking = FastChunking
+            return FastChunking
+        raise AttributeError(f"module '{self.__name__}' has no attribute '{name}'")
+
+agno_submod = _AgnoSubmodule("fastchunk.agno")
+sys.modules["fastchunk.agno"] = agno_submod
+"#;
+
+    let agno_locals = pyo3::types::PyDict::new_bound(py);
+    py.run_bound(agno_code, None, Some(&agno_locals))?;
+    let agno_submod = sys_modules.get_item("fastchunk.agno")?;
+    m.setattr("agno", agno_submod)?;
+
     Ok(())
 }

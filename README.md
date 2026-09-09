@@ -102,6 +102,38 @@ pipeline_nodes = pipeline.run(documents=[doc])
 > - Custom tokenizers or callable length functions (`tokenizer`, `length_function`) are currently **unsupported** by the compiled Rust core (character length is used). Passing custom functions raises an explicit `NotImplementedError`.
 > - FastChunk delegates all text chunking to its Rust core while LlamaIndex's `TextSplitter` base class automatically constructs standard `TextNode` objects, manages `NodeRelationship.SOURCE` and `NodeRelationship.PREVIOUS`/`NEXT` pointers, and propagates metadata.
 
+### 4. Agno Integration (Optional)
+
+FastChunk provides a high-performance `ChunkingStrategy` adapter for Agno knowledge bases and reader workflows:
+
+```bash
+pip install "fastchunk[agno]"
+# or: pip install fastchunk agno
+```
+
+```python
+from fastchunk.agno import FastChunking
+from agno.knowledge.document.base import Document
+from agno.knowledge.reader.text_reader import TextReader
+
+chunker = FastChunking(chunk_size=1000, chunk_overlap=200)
+
+doc = Document(content="Your document text here...", id="doc_1", meta_data={"source": "rag_doc"})
+
+# 1. Chunk Agno Documents directly
+chunks = chunker.chunk(doc)
+
+# 2. Use directly inside Agno readers
+reader = TextReader(chunking_strategy=chunker)
+docs = reader.read("path/to/file.txt")
+```
+
+> **Compatibility Note**:
+> - Validated against `agno==3.0.9`. Minimum supported version is `agno>=3.0.0`.
+> - FastChunk does not claim universal 100% Agno chunking compatibility: `FastChunking` uses FastChunk's recursive character splitting semantics and is **not** an agentic, sentence, or semantic chunker.
+> - Custom tokenizers or callable length functions (`tokenizer`, `length_function`) are currently **unsupported** by the compiled Rust core (character length is used). Passing custom functions raises an explicit `NotImplementedError`.
+> - FastChunk delegates all text chunking to its Rust core while constructing standard Agno `Document` objects with isolated `meta_data` and deterministic Agno chunk IDs (`self._generate_chunk_id`).
+
 ## Development Setup
 
 For contributors building from source or running benchmarks:

@@ -31,6 +31,7 @@ dependencies = []
 [project.optional-dependencies]
 langchain = ["langchain-text-splitters>=1.0.0"]
 llamaindex = ["llama-index-core>=0.10.0"]
+agno = ["agno>=3.0.0"]
 
 [project.urls]
 Homepage = "https://github.com/kushalkp88/fastchunk"
@@ -44,6 +45,7 @@ dev = [
     "pytest-benchmark>=5.0.0",
     "langchain-text-splitters==1.1.2",
     "llama-index-core>=0.10.0",
+    "agno>=3.0.0",
 ]
 
 [tool.uv]
