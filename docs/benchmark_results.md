@@ -53,8 +53,8 @@ The benchmark script tests permutations of:
 | Size | LangChain (Python) | FastChunk (Python via PyO3) | FastChunk (Raw Rust Core) |
 |------|--------------------|---------------------------|---------------------------|
 | 10 KB | 1.83 ms | 6.95 ms | 1.19 ms |
-| 100 KB | 33.70 ms | 68.80 ms | N/A |
-| 1 MB | 181.30 ms | 687.15 ms | N/A |
+| 100 KB | 33.70 ms | 68.80 ms | Not measured. |
+| 1 MB | 181.30 ms | 687.15 ms | Not measured. |
 
 ## 6. FastChunk vs LangChain Speed Ratio
 Currently, from a Python user's perspective, **LangChain is faster than FastChunk**.
@@ -81,3 +81,18 @@ While FastChunk achieves exact 100% API and behavioral parity, the naive transla
 To beat LangChain in Phase 3 Optimization, FastChunk MUST:
 1. Replace `split.chars().count()` with cached byte-to-char indexing or track lengths organically to avoid `O(N)` repeated scans.
 2. Re-architect `_merge_splits` to use zero-copy `&str` spans (resolving the safety issues discovered in Phase 1 without resorting to `String` allocation) to massively reduce PyO3 allocation times.
+
+## 11. Exact Commands Run
+The results were gathered via the following commands directly inside the container environment:
+
+Python FastChunk and LangChain benchmark:
+```bash
+source .venv2/bin/activate
+pytest benchmarks/python_benchmark.py
+```
+
+Rust core Criterion benchmark:
+```bash
+cd crates/fastchunk-core
+cargo bench
+```
