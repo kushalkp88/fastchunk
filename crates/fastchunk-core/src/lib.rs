@@ -227,73 +227,50 @@ impl RecursiveCharacterTextSplitter {
             return final_chunks;
         }
 
-        let mut current_chunks: Vec<String> = Vec::new();
         let sep_len = separator.chars().count();
+        let sep_cost = if self.keep_separator == KeepSeparator::False {
+            sep_len
+        } else {
+            0
+        };
+        let split_lens: Vec<usize> = splits.iter().map(|s| s.chars().count()).collect();
 
-        for split in splits {
-            let split_len = split.chars().count();
+        let mut start = 0;
+        let mut total_len = 0;
 
-            let mut current_docs_len = 0;
-            for (i, c) in current_chunks.iter().enumerate() {
-                current_docs_len += c.chars().count();
-                if i > 0 && self.keep_separator == KeepSeparator::False {
-                    current_docs_len += sep_len;
-                }
-            }
+        for end in 0..splits.len() {
+            let split_len = split_lens[end];
+            let count_in_doc = end - start;
+            let added_len = split_len + if count_in_doc > 0 { sep_cost } else { 0 };
 
-            let total_len = if current_chunks.is_empty() {
-                split_len
-            } else {
-                current_docs_len
-                    + split_len
-                    + if self.keep_separator == KeepSeparator::False {
-                        sep_len
-                    } else {
-                        0
-                    }
-            };
-
-            if total_len > self.chunk_size && !current_chunks.is_empty() {
-                if let Some(joined) = self._join_docs(&current_chunks, separator) {
+            if total_len + added_len > self.chunk_size && count_in_doc > 0 {
+                if let Some(joined) = self._join_docs(&splits[start..end], separator) {
                     final_chunks.push(joined);
                 }
 
-                while !current_chunks.is_empty() {
-                    let mut overlap_len = 0;
-                    for (i, c) in current_chunks.iter().enumerate() {
-                        overlap_len += c.chars().count();
-                        if i > 0 && self.keep_separator == KeepSeparator::False {
-                            overlap_len += sep_len;
-                        }
-                    }
-
-                    let new_total_len = if current_chunks.is_empty() {
-                        split_len
-                    } else {
-                        overlap_len
-                            + split_len
-                            + if self.keep_separator == KeepSeparator::False {
-                                sep_len
-                            } else {
-                                0
-                            }
-                    };
+                while start < end {
+                    let overlap_len = total_len;
+                    let new_total_len = overlap_len + split_len + sep_cost;
 
                     if overlap_len > self.chunk_overlap
                         || (new_total_len > self.chunk_size && overlap_len > 0)
                     {
-                        current_chunks.remove(0);
+                        let front_len = split_lens[start];
+                        let rem_count = end - start;
+                        total_len -= front_len + if rem_count > 1 { sep_cost } else { 0 };
+                        start += 1;
                     } else {
                         break;
                     }
                 }
             }
 
-            current_chunks.push(split.clone());
+            let new_count = end - start;
+            total_len += split_len + if new_count > 0 { sep_cost } else { 0 };
         }
 
-        if !current_chunks.is_empty() {
-            if let Some(joined) = self._join_docs(&current_chunks, separator) {
+        if start < splits.len() {
+            if let Some(joined) = self._join_docs(&splits[start..splits.len()], separator) {
                 final_chunks.push(joined);
             }
         }

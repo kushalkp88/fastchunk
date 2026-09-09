@@ -2,6 +2,9 @@
 name = "fastchunk-python"
 version = "0.1.0"
 edition = "2021"
+description = "Python bindings for FastChunk, a high-performance text chunker"
+license = "Apache-2.0"
+repository = "https://github.com/kushalkp88/fastchunk"
 
 [lib]
 name = "fastchunk"
@@ -9,4 +12,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 fastchunk-core = { path = "../fastchunk-core" }
-pyo3 = { version = "0.21", features = ["extension-module"] }
+pyo3 = { version = "0.21", features = ["abi3-py310", "extension-module"] }
