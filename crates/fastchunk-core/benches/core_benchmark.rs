@@ -1,4 +1,4 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};
 use fastchunk_core::RecursiveCharacterTextSplitter;
 
 fn generate_text(size_kb: usize, kind: &str) -> String {
@@ -18,41 +18,30 @@ fn generate_text(size_kb: usize, kind: &str) -> String {
 }
 
 fn bench_splitters(c: &mut Criterion) {
-    let data_10kb_plain = generate_text(10, "plain");
-    let data_10kb_markdown = generate_text(10, "markdown");
-    let data_10kb_source = generate_text(10, "source_code");
-    let data_10kb_unicode = generate_text(10, "unicode");
-    let data_10kb_emoji = generate_text(10, "emoji");
+    let sizes = [1, 10, 100, 1000];
+    let kinds = ["plain", "markdown", "source_code", "unicode", "emoji"];
+    let configs = [(1000, 200), (500, 50), (2000, 200)];
 
-    let data_1kb_plain = generate_text(1, "plain");
-    let data_1mb_plain = generate_text(1000, "plain");
-    let data_100kb_unicode = generate_text(100, "unicode");
+    let mut group = c.benchmark_group("fastchunk_core");
 
-    let data_100kb_plain = generate_text(100, "plain");
+    // To keep benchmark times reasonable, we reduce sample sizes for large texts.
+    group.sample_size(10);
 
-
-    // Conf A: 1000/200
-    let splitter_a = RecursiveCharacterTextSplitter::new().with_chunk_size(1000).with_chunk_overlap(200);
-
-    c.bench_function("fastchunk_core_10kb_plain_1000_200", |b| b.iter(|| splitter_a.split_text(black_box(&data_10kb_plain))));
-    c.bench_function("fastchunk_core_10kb_markdown_1000_200", |b| b.iter(|| splitter_a.split_text(black_box(&data_10kb_markdown))));
-    c.bench_function("fastchunk_core_10kb_source_1000_200", |b| b.iter(|| splitter_a.split_text(black_box(&data_10kb_source))));
-    c.bench_function("fastchunk_core_10kb_unicode_1000_200", |b| b.iter(|| splitter_a.split_text(black_box(&data_10kb_unicode))));
-    c.bench_function("fastchunk_core_10kb_emoji_1000_200", |b| b.iter(|| splitter_a.split_text(black_box(&data_10kb_emoji))));
-    c.bench_function("fastchunk_core_100kb_plain_1000_200", |b| b.iter(|| splitter_a.split_text(black_box(&data_100kb_plain))));
-
-    c.bench_function("fastchunk_core_1kb_plain_1000_200", |b| b.iter(|| splitter_a.split_text(black_box(&data_1kb_plain))));
-    c.bench_function("fastchunk_core_1mb_plain_1000_200", |b| b.iter(|| splitter_a.split_text(black_box(&data_1mb_plain))));
-    c.bench_function("fastchunk_core_100kb_unicode_1000_200", |b| b.iter(|| splitter_a.split_text(black_box(&data_100kb_unicode))));
-
-
-    // Conf B: 500/50
-    let splitter_b = RecursiveCharacterTextSplitter::new().with_chunk_size(500).with_chunk_overlap(50);
-    c.bench_function("fastchunk_core_10kb_plain_500_50", |b| b.iter(|| splitter_b.split_text(black_box(&data_10kb_plain))));
-
-    // Conf C: 2000/200
-    let splitter_c = RecursiveCharacterTextSplitter::new().with_chunk_size(2000).with_chunk_overlap(200);
-    c.bench_function("fastchunk_core_10kb_plain_2000_200", |b| b.iter(|| splitter_c.split_text(black_box(&data_10kb_plain))));
+    for &size in &sizes {
+        for &kind in &kinds {
+            let text = generate_text(size, kind);
+            for &(chunk_size, chunk_overlap) in &configs {
+                let id = format!("{}kb_{}_{}_{}", size, kind, chunk_size, chunk_overlap);
+                let splitter = RecursiveCharacterTextSplitter::new()
+                    .with_chunk_size(chunk_size)
+                    .with_chunk_overlap(chunk_overlap);
+                group.bench_with_input(BenchmarkId::from_parameter(&id), &text, |b, t| {
+                    b.iter(|| splitter.split_text(black_box(t)));
+                });
+            }
+        }
+    }
+    group.finish();
 }
 
 criterion_group!(benches, bench_splitters);
