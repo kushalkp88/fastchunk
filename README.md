@@ -2,7 +2,42 @@
 
 FastChunk is a high-performance text chunker with a Rust core (`fastchunk-core`) and Python bindings (`fastchunk`), providing a drop-in replacement for LangChain's `RecursiveCharacterTextSplitter` with 100% byte-for-byte output parity.
 
+## Installation
+
+FastChunk distributes precompiled binary wheels for supported platforms. Users installing prebuilt wheels do **not** need the Rust toolchain installed on their system.
+
+Using `pip`:
+```bash
+pip install fastchunk
+```
+
+Using `uv`:
+```bash
+uv add fastchunk
+```
+
+## Quickstart
+
+```python
+from fastchunk import RecursiveCharacterTextSplitter
+
+text = """
+FastChunk is designed as a drop-in replacement for LangChain's text splitters.
+It produces identical chunk boundaries with significant performance speedups.
+"""
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,
+    chunk_overlap=200,
+)
+
+chunks = splitter.split_text(text)
+print(chunks)
+```
+
 ## Development Setup
+
+For contributors building from source or running benchmarks:
 
 FastChunk uses [uv](https://docs.astral.sh/uv/) as its standard Python environment and package manager. Do not use Conda, Miniconda, Poetry, or system Python environments.
 
@@ -51,7 +86,6 @@ uv run python audit_harness.py
 
 #### Rust Core Unit Tests
 ```bash
-source .venv/bin/activate
 cargo test
 ```
 
