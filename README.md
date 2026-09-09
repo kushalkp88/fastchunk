@@ -70,6 +70,38 @@ py_splitter = FastChunkTextSplitter.from_language(Language.PYTHON, chunk_size=50
 > - Validated against `langchain-text-splitters==1.1.2` and `langchain-core==1.6.2`.
 > - FastChunk does not claim universal 100% LangChain API compatibility because custom `length_function` callables are intentionally unsupported (FastChunk calculates lengths in high-speed compiled Rust using standard character length). Passing a custom `length_function` raises a descriptive `NotImplementedError`.
 
+### 3. LlamaIndex Integration (Optional)
+
+FastChunk provides a high-performance `NodeParser` / `TextSplitter` adapter for LlamaIndex RAG pipelines:
+
+```bash
+pip install "fastchunk[llamaindex]"
+# or: pip install fastchunk llama-index-core
+```
+
+```python
+from fastchunk.llamaindex import FastChunkNodeParser
+from llama_index.core.schema import Document
+from llama_index.core.ingestion import IngestionPipeline
+
+parser = FastChunkNodeParser(chunk_size=1000, chunk_overlap=200)
+
+doc = Document(text="Your document text here...", metadata={"source": "rag_doc"})
+
+# 1. Parse directly into LlamaIndex TextNodes (preserving metadata and node relationships)
+nodes = parser.get_nodes_from_documents([doc])
+
+# 2. Use inside an IngestionPipeline or VectorStoreIndex
+pipeline = IngestionPipeline(transformations=[parser])
+pipeline_nodes = pipeline.run(documents=[doc])
+```
+
+> **Compatibility Note**:
+> - Validated against `llama-index-core==0.14.24`. Minimum supported version is `llama-index-core>=0.10.0`.
+> - FastChunk does not claim universal 100% LlamaIndex compatibility: `FastChunkNodeParser` uses FastChunk's recursive character splitting semantics and is **not** a drop-in replacement for LlamaIndex's `SentenceSplitter` (which implements sentence-boundary regex splitting).
+> - Custom tokenizers or callable length functions (`tokenizer`, `length_function`) are currently **unsupported** by the compiled Rust core (character length is used). Passing custom functions raises an explicit `NotImplementedError`.
+> - FastChunk delegates all text chunking to its Rust core while LlamaIndex's `TextSplitter` base class automatically constructs standard `TextNode` objects, manages `NodeRelationship.SOURCE` and `NodeRelationship.PREVIOUS`/`NEXT` pointers, and propagates metadata.
+
 ## Development Setup
 
 For contributors building from source or running benchmarks:

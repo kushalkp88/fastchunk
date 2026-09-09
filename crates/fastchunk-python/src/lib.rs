@@ -308,5 +308,84 @@ sys.modules["fastchunk.langchain"] = langchain_submod
     let langchain_submod = sys_modules.get_item("fastchunk.langchain")?;
     m.setattr("langchain", langchain_submod)?;
 
+    let llamaindex_code = r#"
+import sys
+import types
+
+class _LlamaIndexSubmodule(types.ModuleType):
+    def __getattr__(self, name):
+        if name == "FastChunkNodeParser":
+            try:
+                from llama_index.core.node_parser import TextSplitter
+                from pydantic import PrivateAttr
+            except ImportError:
+                raise ImportError(
+                    "llama-index-core is required to use fastchunk.llamaindex. "
+                    "Please install it with `pip install llama-index-core`."
+                ) from None
+
+            import fastchunk
+
+            class FastChunkNodeParser(TextSplitter):
+                """High-performance LlamaIndex NodeParser backed by FastChunk's Rust core."""
+
+                chunk_size: int = 1000
+                chunk_overlap: int = 200
+                _fastchunk_splitter: fastchunk.RecursiveCharacterTextSplitter = PrivateAttr()
+
+                def __init__(
+                    self,
+                    chunk_size: int = 1000,
+                    chunk_overlap: int = 200,
+                    separators: list[str] | None = None,
+                    keep_separator: bool | str = True,
+                    is_separator_regex: bool = False,
+                    strip_whitespace: bool = True,
+                    **kwargs,
+                ):
+                    if "tokenizer" in kwargs and kwargs["tokenizer"] is not None:
+                        raise NotImplementedError(
+                            "Custom tokenizers/length_functions are not supported in FastChunkNodeParser. "
+                            "FastChunk calculates lengths in compiled Rust using standard character length."
+                        )
+                    if "length_function" in kwargs and kwargs["length_function"] is not None:
+                        raise NotImplementedError(
+                            "Custom length_functions are not supported in FastChunkNodeParser. "
+                            "FastChunk calculates lengths in compiled Rust using standard character length."
+                        )
+                    super().__init__(
+                        chunk_size=chunk_size,
+                        chunk_overlap=chunk_overlap,
+                        **kwargs,
+                    )
+                    self._fastchunk_splitter = fastchunk.RecursiveCharacterTextSplitter(
+                        chunk_size=chunk_size,
+                        chunk_overlap=chunk_overlap,
+                        separators=separators,
+                        keep_separator=keep_separator,
+                        is_separator_regex=is_separator_regex,
+                        strip_whitespace=strip_whitespace,
+                    )
+
+                def split_text(self, text: str) -> list[str]:
+                    return self._fastchunk_splitter.split_text(text)
+
+                @classmethod
+                def class_name(cls) -> str:
+                    return "FastChunkNodeParser"
+
+            self.FastChunkNodeParser = FastChunkNodeParser
+            return FastChunkNodeParser
+        raise AttributeError(f"module '{self.__name__}' has no attribute '{name}'")
+
+llamaindex_submod = _LlamaIndexSubmodule("fastchunk.llamaindex")
+sys.modules["fastchunk.llamaindex"] = llamaindex_submod
+"#;
+
+    let llamaindex_locals = pyo3::types::PyDict::new_bound(py);
+    py.run_bound(llamaindex_code, None, Some(&llamaindex_locals))?;
+    let llamaindex_submod = sys_modules.get_item("fastchunk.llamaindex")?;
+    m.setattr("llamaindex", llamaindex_submod)?;
+
     Ok(())
 }
