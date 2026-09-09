@@ -28,6 +28,9 @@ classifiers = [
 dynamic = ["version"]
 dependencies = []
 
+[project.optional-dependencies]
+langchain = ["langchain-text-splitters>=1.0.0"]
+
 [project.urls]
 Homepage = "https://github.com/kushalkp88/fastchunk"
 Repository = "https://github.com/kushalkp88/fastchunk"

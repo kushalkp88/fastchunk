@@ -242,5 +242,71 @@ impl Document {
 fn fastchunk(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<RecursiveCharacterTextSplitter>()?;
     m.add_class::<Document>()?;
+
+    let py = m.py();
+    let sys_modules = py.import_bound("sys")?.getattr("modules")?;
+
+    let langchain_code = r#"
+import sys
+import types
+
+class _LangChainSubmodule(types.ModuleType):
+    def __getattr__(self, name):
+        if name == "FastChunkTextSplitter":
+            try:
+                from langchain_text_splitters.base import TextSplitter
+            except ImportError:
+                raise ImportError(
+                    "langchain-text-splitters is required to use fastchunk.langchain. "
+                    "Please install it with `pip install langchain-text-splitters`."
+                ) from None
+
+            import fastchunk
+
+            class FastChunkTextSplitter(TextSplitter):
+                """High-performance LangChain TextSplitter backed by FastChunk's Rust core."""
+
+                def __init__(
+                    self,
+                    separators: list[str] | None = None,
+                    keep_separator: bool | str = True,
+                    is_separator_regex: bool = False,
+                    **kwargs,
+                ):
+                    super().__init__(keep_separator=keep_separator, **kwargs)
+                    self._separators = separators
+                    self._is_separator_regex = is_separator_regex
+                    self._fastchunk_splitter = fastchunk.RecursiveCharacterTextSplitter(
+                        separators=separators,
+                        chunk_size=self._chunk_size,
+                        chunk_overlap=self._chunk_overlap,
+                        length_function=self._length_function,
+                        keep_separator=keep_separator,
+                        is_separator_regex=is_separator_regex,
+                        strip_whitespace=self._strip_whitespace,
+                    )
+
+                def split_text(self, text: str) -> list[str]:
+                    return self._fastchunk_splitter.split_text(text)
+
+                @classmethod
+                def from_language(cls, language, **kwargs):
+                    from langchain_text_splitters import RecursiveCharacterTextSplitter as LCTS
+                    separators = LCTS.get_separators_for_language(language)
+                    return cls(separators=separators, is_separator_regex=True, **kwargs)
+
+            self.FastChunkTextSplitter = FastChunkTextSplitter
+            return FastChunkTextSplitter
+        raise AttributeError(f"module '{self.__name__}' has no attribute '{name}'")
+
+langchain_submod = _LangChainSubmodule("fastchunk.langchain")
+sys.modules["fastchunk.langchain"] = langchain_submod
+"#;
+
+    let submod_locals = pyo3::types::PyDict::new_bound(py);
+    py.run_bound(langchain_code, None, Some(&submod_locals))?;
+    let langchain_submod = sys_modules.get_item("fastchunk.langchain")?;
+    m.setattr("langchain", langchain_submod)?;
+
     Ok(())
 }

@@ -18,11 +18,15 @@ uv add fastchunk
 
 ## Quickstart
 
+### 1. Standalone Text Chunking
+
+Core FastChunk has **zero mandatory third-party dependencies**.
+
 ```python
-from fastchunk import RecursiveCharacterTextSplitter
+from fastchunk import RecursiveCharacterTextSplitter, Document
 
 text = """
-FastChunk is designed as a drop-in replacement for LangChain's text splitters.
+FastChunk is designed as a drop-in replacement for text splitting.
 It produces identical chunk boundaries with significant performance speedups.
 """
 
@@ -31,9 +35,40 @@ splitter = RecursiveCharacterTextSplitter(
     chunk_overlap=200,
 )
 
+# Split raw text
 chunks = splitter.split_text(text)
-print(chunks)
+
+# Generic Document API (zero dependencies)
+docs = splitter.create_documents([text], metadatas=[{"source": "demo"}])
+split_docs = splitter.split_documents(docs)
 ```
+
+### 2. LangChain Integration (Optional)
+
+FastChunk provides an optional adapter for LangChain pipelines:
+
+```bash
+pip install "fastchunk[langchain]"
+# or: pip install fastchunk langchain-text-splitters
+```
+
+```python
+from fastchunk.langchain import FastChunkTextSplitter
+from langchain_text_splitters import Language
+
+splitter = FastChunkTextSplitter(chunk_size=1000, chunk_overlap=200)
+
+# Works directly with LangChain Document pipelines
+docs = splitter.create_documents(["some text"])
+split_docs = splitter.split_documents(docs)
+
+# Language-aware code splitting
+py_splitter = FastChunkTextSplitter.from_language(Language.PYTHON, chunk_size=500)
+```
+
+> **Compatibility Note**:
+> - Validated against `langchain-text-splitters==1.1.2` and `langchain-core==1.6.2`.
+> - FastChunk does not claim universal 100% LangChain API compatibility because custom `length_function` callables are intentionally unsupported (FastChunk calculates lengths in high-speed compiled Rust using standard character length). Passing a custom `length_function` raises a descriptive `NotImplementedError`.
 
 ## Development Setup
 
