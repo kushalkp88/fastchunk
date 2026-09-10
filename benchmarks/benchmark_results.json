@@ -1,0 +1,3453 @@
+{
+  "metadata": {
+    "cpu": "Apple M1",
+    "arch": "arm64",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python_version": "3.12.11",
+    "rust_version": "rustc 1.88.0 (6b00bc388 2025-06-23)",
+    "git_commit": "7a6f171b08df4c51b11f504de508bad3974cb6b3",
+    "fastchunk_version": "0.1.0",
+    "langchain_text_splitters": "1.1.2",
+    "langchain_core": "1.6.2",
+    "llama_index_core": "0.14.24",
+    "agno": "3.0.9",
+    "pytest_benchmark": "5.3.0"
+  },
+  "raw_chunking": {
+    "1000_200": {
+      "plain": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.0033750038710422814,
+            "min_ms": 0.003291999746579677,
+            "max_ms": 0.003583998477552086,
+            "mean_ms": 0.0033974801772274077,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.0013750031939707696,
+            "min_ms": 0.0013329990906640887,
+            "max_ms": 0.0015420009731315076,
+            "mean_ms": 0.001389980170642957,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.0013750031939707696,
+            "min_ms": 0.0013339958968572319,
+            "max_ms": 0.0014589968486689031,
+            "mean_ms": 0.001392459380440414,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.01274999522138387,
+            "min_ms": 0.012416996469255537,
+            "max_ms": 0.01408400567015633,
+            "mean_ms": 0.012804219586541876,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.0013750031939707696,
+            "min_ms": 0.0013329990906640887,
+            "max_ms": 0.00145800004247576,
+            "mean_ms": 0.001386579970130697,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 2.45,
+          "speedup_adapter_lc_vs_lc": 2.45,
+          "overhead_lc_pct": 0.0,
+          "overhead_li_pct": 827.27,
+          "overhead_ag_pct": 0.0
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.019354498363099992,
+            "min_ms": 0.017917001969181,
+            "max_ms": 0.04262499714968726,
+            "mean_ms": 0.020273666450520977,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.008625000191386789,
+            "min_ms": 0.008582996088080108,
+            "max_ms": 0.008708004315849394,
+            "mean_ms": 0.008638832999470955,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.009250004950445145,
+            "min_ms": 0.008875002095010132,
+            "max_ms": 0.00945899955695495,
+            "mean_ms": 0.009211067905804763,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.02152099841623567,
+            "min_ms": 0.02029100141953677,
+            "max_ms": 0.023375003365799785,
+            "mean_ms": 0.021437466784846038,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.008666000212542713,
+            "min_ms": 0.008625000191386789,
+            "max_ms": 0.008708004315849394,
+            "mean_ms": 0.008658232885257652,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 2.24,
+          "speedup_adapter_lc_vs_lc": 2.09,
+          "overhead_lc_pct": 7.25,
+          "overhead_li_pct": 149.52,
+          "overhead_ag_pct": 0.48
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.16999999934341758,
+            "min_ms": 0.16925000090850517,
+            "max_ms": 0.17300000035902485,
+            "mean_ms": 0.17027786573938405,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.07900000491645187,
+            "min_ms": 0.0788750039646402,
+            "max_ms": 0.09204199886880815,
+            "mean_ms": 0.08023060120952626,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.08054199861362576,
+            "min_ms": 0.08012499893084168,
+            "max_ms": 0.08533400250598788,
+            "mean_ms": 0.08176106736452009,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.09479100117459893,
+            "min_ms": 0.09287500142818317,
+            "max_ms": 0.10283300071023405,
+            "mean_ms": 0.095697000506334,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.08016599895199761,
+            "min_ms": 0.07995800115168095,
+            "max_ms": 0.08120799611788243,
+            "mean_ms": 0.0802331996965222,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 2.15,
+          "speedup_adapter_lc_vs_lc": 2.11,
+          "overhead_lc_pct": 1.95,
+          "overhead_li_pct": 19.99,
+          "overhead_ag_pct": 1.48
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 1.7938329983735457,
+            "min_ms": 1.7621250008232892,
+            "max_ms": 1.9946249958593398,
+            "mean_ms": 1.8321368562672953,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.8092089992715046,
+            "min_ms": 0.7945420002215542,
+            "max_ms": 0.8721250051166862,
+            "mean_ms": 0.8198454296299522,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.793250001152046,
+            "min_ms": 0.7818750018486753,
+            "max_ms": 0.8556669999961741,
+            "mean_ms": 0.8002024291532247,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.8469169988529757,
+            "min_ms": 0.8064590001595207,
+            "max_ms": 0.9588329994585365,
+            "mean_ms": 0.8610775704645286,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.8046250004554167,
+            "min_ms": 0.7841250044293702,
+            "max_ms": 0.8415830016019754,
+            "mean_ms": 0.8062024291055943,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 2.22,
+          "speedup_adapter_lc_vs_lc": 2.26,
+          "overhead_lc_pct": -1.97,
+          "overhead_li_pct": 4.66,
+          "overhead_ag_pct": -0.57
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 21.3842500015744,
+            "min_ms": 21.226374999969266,
+            "max_ms": 21.64949999860255,
+            "mean_ms": 21.420041666715406,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 8.58679100201698,
+            "min_ms": 8.51241600321373,
+            "max_ms": 8.832041996356566,
+            "mean_ms": 8.643749667195758,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 8.62875000166241,
+            "min_ms": 8.53458400524687,
+            "max_ms": 8.693541996763088,
+            "mean_ms": 8.618958667890789,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 8.774291003646795,
+            "min_ms": 8.675082994159311,
+            "max_ms": 9.11570800235495,
+            "mean_ms": 8.855027333387019,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 8.70908400247572,
+            "min_ms": 8.683375002874527,
+            "max_ms": 8.873207996657584,
+            "mean_ms": 8.75522233400261,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 2.49,
+          "speedup_adapter_lc_vs_lc": 2.48,
+          "overhead_lc_pct": 0.49,
+          "overhead_li_pct": 2.18,
+          "overhead_ag_pct": 1.42
+        }
+      },
+      "markdown": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.006166999810375273,
+            "min_ms": 0.006000002031214535,
+            "max_ms": 0.021500003640539944,
+            "mean_ms": 0.00651584065053612,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.001915999746415764,
+            "min_ms": 0.001791995600797236,
+            "max_ms": 0.0022500025806948543,
+            "mean_ms": 0.0019115794566459954,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.0018329992599319667,
+            "min_ms": 0.0017499987734481692,
+            "max_ms": 0.012583994248416275,
+            "mean_ms": 0.0020383593800943345,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.013166005373932421,
+            "min_ms": 0.012958000297658145,
+            "max_ms": 0.027499998395796865,
+            "mean_ms": 0.013509000709746033,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.0018330028979107738,
+            "min_ms": 0.0017909987946040928,
+            "max_ms": 0.001957996573764831,
+            "mean_ms": 0.0018316392379347235,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 3.22,
+          "speedup_adapter_lc_vs_lc": 3.36,
+          "overhead_lc_pct": -4.33,
+          "overhead_li_pct": 587.16,
+          "overhead_ag_pct": -4.33
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.048499998229090124,
+            "min_ms": 0.04837499727727845,
+            "max_ms": 0.05137499829288572,
+            "mean_ms": 0.04874849934518958,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.013167002180125564,
+            "min_ms": 0.013041993952356279,
+            "max_ms": 0.01333300315309316,
+            "mean_ms": 0.013172199639181295,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.013187498552724719,
+            "min_ms": 0.013124998076818883,
+            "max_ms": 0.01341600000159815,
+            "mean_ms": 0.013206966104917228,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.025125002139247954,
+            "min_ms": 0.02487500023562461,
+            "max_ms": 0.02566699549788609,
+            "mean_ms": 0.025140333067004878,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.014208500942913815,
+            "min_ms": 0.013624994608107954,
+            "max_ms": 0.0324159991578199,
+            "mean_ms": 0.0155332997868148,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 3.68,
+          "speedup_adapter_lc_vs_lc": 3.68,
+          "overhead_lc_pct": 0.16,
+          "overhead_li_pct": 90.82,
+          "overhead_ag_pct": 7.91
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.4784579941770062,
+            "min_ms": 0.4724160025944002,
+            "max_ms": 0.5145420000189915,
+            "mean_ms": 0.4890749337694918,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.12829199840780348,
+            "min_ms": 0.1265419996343553,
+            "max_ms": 0.15374999929917976,
+            "mean_ms": 0.13007499946979806,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.12900000001536682,
+            "min_ms": 0.12675000471062958,
+            "max_ms": 0.14133400691207498,
+            "mean_ms": 0.12998066716439402,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.15312500181607902,
+            "min_ms": 0.13758299610344693,
+            "max_ms": 0.19212500046705827,
+            "mean_ms": 0.15782766713527963,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.12520800373749807,
+            "min_ms": 0.1249999986612238,
+            "max_ms": 0.12891700316686183,
+            "mean_ms": 0.12563886654485637,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 3.73,
+          "speedup_adapter_lc_vs_lc": 3.71,
+          "overhead_lc_pct": 0.55,
+          "overhead_li_pct": 19.36,
+          "overhead_ag_pct": -2.4
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 4.9958329982473515,
+            "min_ms": 4.85554199985927,
+            "max_ms": 5.157457999303006,
+            "mean_ms": 4.9944165709478385,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 1.197541001602076,
+            "min_ms": 1.1794579986599274,
+            "max_ms": 1.242083999386523,
+            "mean_ms": 1.2062498572049662,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 1.188749993161764,
+            "min_ms": 1.177750003989786,
+            "max_ms": 1.3728750054724514,
+            "mean_ms": 1.2205415717159798,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 1.2237499977345578,
+            "min_ms": 1.1916660005226731,
+            "max_ms": 1.3374589980230667,
+            "mean_ms": 1.2381545706635475,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 1.2016660039080307,
+            "min_ms": 1.1828330025309697,
+            "max_ms": 1.2593339997692965,
+            "mean_ms": 1.2162382866206047,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 4.17,
+          "speedup_adapter_lc_vs_lc": 4.2,
+          "overhead_lc_pct": -0.73,
+          "overhead_li_pct": 2.19,
+          "overhead_ag_pct": 0.34
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 54.69587499828776,
+            "min_ms": 54.574832996877376,
+            "max_ms": 54.81787499593338,
+            "mean_ms": 54.696194330366176,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 13.248166003904771,
+            "min_ms": 13.09495799796423,
+            "max_ms": 13.779209002677817,
+            "mean_ms": 13.374111001515606,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 13.352624999242835,
+            "min_ms": 13.146375000360422,
+            "max_ms": 13.430250000965316,
+            "mean_ms": 13.309750000189524,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 13.254249999590684,
+            "min_ms": 13.00279200222576,
+            "max_ms": 13.583374995505437,
+            "mean_ms": 13.280138999107294,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 13.318083001649939,
+            "min_ms": 13.207791998866014,
+            "max_ms": 13.405457997578196,
+            "mean_ms": 13.310444332698049,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 4.13,
+          "speedup_adapter_lc_vs_lc": 4.1,
+          "overhead_lc_pct": 0.79,
+          "overhead_li_pct": 0.05,
+          "overhead_ag_pct": 0.53
+        }
+      },
+      "source_code": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.004250003257766366,
+            "min_ms": 0.004082998202648014,
+            "max_ms": 0.004707995685748756,
+            "mean_ms": 0.004270860372344032,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.0015419973351527005,
+            "min_ms": 0.0014999968698248267,
+            "max_ms": 0.0016660051187500358,
+            "mean_ms": 0.001543280086480081,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.0016659978427924216,
+            "min_ms": 0.0015409968909807503,
+            "max_ms": 0.0018330028979107738,
+            "mean_ms": 0.001650759659241885,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.012958997103851289,
+            "min_ms": 0.01274999522138387,
+            "max_ms": 0.013666998711414635,
+            "mean_ms": 0.012999999598832801,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.0015420009731315076,
+            "min_ms": 0.0014999968698248267,
+            "max_ms": 0.0016659978427924216,
+            "mean_ms": 0.0015615200391039252,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 2.76,
+          "speedup_adapter_lc_vs_lc": 2.55,
+          "overhead_lc_pct": 8.04,
+          "overhead_li_pct": 740.4,
+          "overhead_ag_pct": 0.0
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.02864550333470106,
+            "min_ms": 0.02608299837447703,
+            "max_ms": 0.052207993576303124,
+            "mean_ms": 0.030361032986547798,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.010333500540582463,
+            "min_ms": 0.010249998013023287,
+            "max_ms": 0.010915995517279953,
+            "mean_ms": 0.010380500316387042,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.010645500879036263,
+            "min_ms": 0.010208997991867363,
+            "max_ms": 0.011500000255182385,
+            "mean_ms": 0.010761099838418886,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.022208998416317627,
+            "min_ms": 0.021749998268205673,
+            "max_ms": 0.02308400144102052,
+            "mean_ms": 0.022281932857974123,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.01020800118567422,
+            "min_ms": 0.010166004358325154,
+            "max_ms": 0.010333002137485892,
+            "mean_ms": 0.01021946663968265,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 2.77,
+          "speedup_adapter_lc_vs_lc": 2.69,
+          "overhead_lc_pct": 3.02,
+          "overhead_li_pct": 114.92,
+          "overhead_ag_pct": -1.21
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.25391700182808563,
+            "min_ms": 0.25350000214530155,
+            "max_ms": 0.2626669956953265,
+            "mean_ms": 0.2548556003603153,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.09475000115344301,
+            "min_ms": 0.09437500557396561,
+            "max_ms": 0.1205000007757917,
+            "mean_ms": 0.09741933560386921,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.09700000373413786,
+            "min_ms": 0.0944580024224706,
+            "max_ms": 0.10208300227532163,
+            "mean_ms": 0.09685560022868837,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.10725000174716115,
+            "min_ms": 0.10683299478841946,
+            "max_ms": 0.12208399857627228,
+            "mean_ms": 0.11065559907971571,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.09458299609832466,
+            "min_ms": 0.09424999734619632,
+            "max_ms": 0.12316599895711988,
+            "mean_ms": 0.09692219949405019,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 2.68,
+          "speedup_adapter_lc_vs_lc": 2.62,
+          "overhead_lc_pct": 2.37,
+          "overhead_li_pct": 13.19,
+          "overhead_ag_pct": -0.18
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 2.736959002504591,
+            "min_ms": 2.664207997440826,
+            "max_ms": 2.9902499954914674,
+            "mean_ms": 2.776624999699249,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.9450829966226593,
+            "min_ms": 0.9185410017380491,
+            "max_ms": 0.9595000010449439,
+            "mean_ms": 0.9426785722358285,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.9242919986718334,
+            "min_ms": 0.9178749969578348,
+            "max_ms": 1.0869580000871792,
+            "mean_ms": 0.9595298574173025,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.9692500025266781,
+            "min_ms": 0.9326250001322478,
+            "max_ms": 0.9901670055114664,
+            "mean_ms": 0.9645775727611701,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.9236250043613836,
+            "min_ms": 0.919917001738213,
+            "max_ms": 1.049291000526864,
+            "mean_ms": 0.9478097147491228,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 2.9,
+          "speedup_adapter_lc_vs_lc": 2.96,
+          "overhead_lc_pct": -2.2,
+          "overhead_li_pct": 2.56,
+          "overhead_ag_pct": -2.27
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 32.166917000722606,
+            "min_ms": 31.984166998881847,
+            "max_ms": 49.83974999777274,
+            "mean_ms": 37.9969446657924,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 10.214499998255633,
+            "min_ms": 10.145166001166217,
+            "max_ms": 10.4032079980243,
+            "mean_ms": 10.25429133248205,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 10.28875000338303,
+            "min_ms": 10.149957997782622,
+            "max_ms": 10.410208997200243,
+            "mean_ms": 10.282972332788631,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 10.259000002406538,
+            "min_ms": 10.031208999862429,
+            "max_ms": 10.49704100296367,
+            "mean_ms": 10.262416668410879,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 10.213624998868909,
+            "min_ms": 10.188708998612128,
+            "max_ms": 10.236333997454494,
+            "mean_ms": 10.212889331645178,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 3.15,
+          "speedup_adapter_lc_vs_lc": 3.13,
+          "overhead_lc_pct": 0.73,
+          "overhead_li_pct": 0.44,
+          "overhead_ag_pct": -0.01
+        }
+      },
+      "unicode": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.005125002644490451,
+            "min_ms": 0.005000001692678779,
+            "max_ms": 0.005333997251000255,
+            "mean_ms": 0.005134999955771491,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.004520501533988863,
+            "min_ms": 0.004417001036927104,
+            "max_ms": 0.004999994416721165,
+            "mean_ms": 0.004593339399434626,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.004540997906588018,
+            "min_ms": 0.004458997864276171,
+            "max_ms": 0.004584006092045456,
+            "mean_ms": 0.004525819676928222,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.016604502889094874,
+            "min_ms": 0.01629199687158689,
+            "max_ms": 0.018250000721309334,
+            "mean_ms": 0.016834999987622723,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.004750003427034244,
+            "min_ms": 0.004540997906588018,
+            "max_ms": 0.04208300379104912,
+            "mean_ms": 0.005664959317073226,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 1.13,
+          "speedup_adapter_lc_vs_lc": 1.13,
+          "overhead_lc_pct": 0.45,
+          "overhead_li_pct": 267.32,
+          "overhead_ag_pct": 5.08
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.036833000194747,
+            "min_ms": 0.036167002690490335,
+            "max_ms": 0.037208003050182015,
+            "mean_ms": 0.036815334897255525,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.03889549770974554,
+            "min_ms": 0.03825000021606684,
+            "max_ms": 0.03941699833376333,
+            "mean_ms": 0.038766533543821424,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.04006250310339965,
+            "min_ms": 0.03825000021606684,
+            "max_ms": 0.05879200034542009,
+            "mean_ms": 0.04107089989702217,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.050604499847395346,
+            "min_ms": 0.05029099702369422,
+            "max_ms": 0.07558300421806052,
+            "mean_ms": 0.05276793284186473,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.03837500116787851,
+            "min_ms": 0.03825000021606684,
+            "max_ms": 0.04016700404463336,
+            "mean_ms": 0.03843469918744328,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 0.95,
+          "speedup_adapter_lc_vs_lc": 0.92,
+          "overhead_lc_pct": 3.0,
+          "overhead_li_pct": 30.1,
+          "overhead_ag_pct": -1.34
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.3652910017990507,
+            "min_ms": 0.3594170048017986,
+            "max_ms": 0.43658300273818895,
+            "mean_ms": 0.3750944005635877,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.38283400499494746,
+            "min_ms": 0.3758750026463531,
+            "max_ms": 0.399709002522286,
+            "mean_ms": 0.3841472668379235,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.3769169998122379,
+            "min_ms": 0.374625000404194,
+            "max_ms": 0.4036249956698157,
+            "mean_ms": 0.3785694663141233,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.3904999975929968,
+            "min_ms": 0.3892919994541444,
+            "max_ms": 0.43720900430344045,
+            "mean_ms": 0.3997613341198303,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.378249998902902,
+            "min_ms": 0.37483299820451066,
+            "max_ms": 0.39237499731825665,
+            "mean_ms": 0.37880826615340385,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 0.95,
+          "speedup_adapter_lc_vs_lc": 0.97,
+          "overhead_lc_pct": -1.55,
+          "overhead_li_pct": 2.0,
+          "overhead_ag_pct": -1.2
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 3.9579580043209717,
+            "min_ms": 3.8467920021503232,
+            "max_ms": 4.339167004218325,
+            "mean_ms": 4.047506145850223,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 3.901791002135724,
+            "min_ms": 3.795249998802319,
+            "max_ms": 3.9711669960524887,
+            "mean_ms": 3.8791607148596086,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 3.8841669957037084,
+            "min_ms": 3.841875004582107,
+            "max_ms": 4.293041005439591,
+            "mean_ms": 3.9393988575154384,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 3.9990000004763715,
+            "min_ms": 3.889791994879488,
+            "max_ms": 4.213915999571327,
+            "mean_ms": 4.0114702850197705,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 3.826208005193621,
+            "min_ms": 3.7599170027533546,
+            "max_ms": 3.9763330059940927,
+            "mean_ms": 3.834958432500051,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 1.01,
+          "speedup_adapter_lc_vs_lc": 1.02,
+          "overhead_lc_pct": -0.45,
+          "overhead_li_pct": 2.49,
+          "overhead_ag_pct": -1.94
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 52.28625000017928,
+            "min_ms": 51.83937500260072,
+            "max_ms": 53.11824999807868,
+            "mean_ms": 52.41462500028623,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 40.021958004217595,
+            "min_ms": 40.02066600514809,
+            "max_ms": 40.11666600126773,
+            "mean_ms": 40.05309667021114,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 40.293041995028034,
+            "min_ms": 39.76408300513867,
+            "max_ms": 40.305916001670994,
+            "mean_ms": 40.121013667279236,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 40.55474999768194,
+            "min_ms": 40.087624998704996,
+            "max_ms": 41.00020800251514,
+            "mean_ms": 40.54752766630069,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 40.3318329990725,
+            "min_ms": 40.098707999277394,
+            "max_ms": 41.65870900033042,
+            "mean_ms": 40.696416666226774,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 1.31,
+          "speedup_adapter_lc_vs_lc": 1.3,
+          "overhead_lc_pct": 0.68,
+          "overhead_li_pct": 1.33,
+          "overhead_ag_pct": 0.77
+        }
+      },
+      "emoji": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.004540997906588018,
+            "min_ms": 0.004458001058083028,
+            "max_ms": 0.004749999789055437,
+            "mean_ms": 0.004537399363471195,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.002167002094211057,
+            "min_ms": 0.002124994352925569,
+            "max_ms": 0.0025840054149739444,
+            "mean_ms": 0.0021965800260659307,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.0022089989215601236,
+            "min_ms": 0.0021659943740814924,
+            "max_ms": 0.0023339962353929877,
+            "mean_ms": 0.0022250195615924895,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.013625001884065568,
+            "min_ms": 0.013416996807791293,
+            "max_ms": 0.014666002243757248,
+            "mean_ms": 0.013691659405594692,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.0022079984773881733,
+            "min_ms": 0.002125001628883183,
+            "max_ms": 0.002458000381011516,
+            "mean_ms": 0.002207480138167739,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 2.1,
+          "speedup_adapter_lc_vs_lc": 2.06,
+          "overhead_lc_pct": 1.94,
+          "overhead_li_pct": 528.75,
+          "overhead_ag_pct": 1.89
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.03195799945387989,
+            "min_ms": 0.031708004826214164,
+            "max_ms": 0.03279200609540567,
+            "mean_ms": 0.03199863252424014,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.015958001313265413,
+            "min_ms": 0.01587499718880281,
+            "max_ms": 0.016083999071270227,
+            "mean_ms": 0.015951500487669062,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.016958503692876548,
+            "min_ms": 0.0162090000230819,
+            "max_ms": 0.07324999751290306,
+            "mean_ms": 0.02321659994777292,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.030916497053112835,
+            "min_ms": 0.028624999686144292,
+            "max_ms": 0.07724999886704609,
+            "mean_ms": 0.03722086645818005,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.01629199687158689,
+            "min_ms": 0.0162090000230819,
+            "max_ms": 0.016375000996049494,
+            "mean_ms": 0.016290333345144365,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 2.0,
+          "speedup_adapter_lc_vs_lc": 1.88,
+          "overhead_lc_pct": 6.27,
+          "overhead_li_pct": 93.74,
+          "overhead_ag_pct": 2.09
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.3108750024694018,
+            "min_ms": 0.30329199944389984,
+            "max_ms": 0.35000000207219273,
+            "mean_ms": 0.312194466823712,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.15312500181607902,
+            "min_ms": 0.15299999358830974,
+            "max_ms": 0.1536249983473681,
+            "mean_ms": 0.1531945337774232,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.15045799955260009,
+            "min_ms": 0.1502499944763258,
+            "max_ms": 0.1686670002527535,
+            "mean_ms": 0.15186939999694005,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.1655830055824481,
+            "min_ms": 0.1630830010981299,
+            "max_ms": 0.2610420051496476,
+            "mean_ms": 0.17845839950799322,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.15049999637994915,
+            "min_ms": 0.15025000175228342,
+            "max_ms": 0.15720800001872703,
+            "mean_ms": 0.151072133545919,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 2.03,
+          "speedup_adapter_lc_vs_lc": 2.07,
+          "overhead_lc_pct": -1.74,
+          "overhead_li_pct": 8.14,
+          "overhead_ag_pct": -1.71
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 3.3705829991959035,
+            "min_ms": 3.164041001582518,
+            "max_ms": 4.142958998272661,
+            "mean_ms": 3.4273628563304164,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 1.511749993369449,
+            "min_ms": 1.4977920000092126,
+            "max_ms": 1.8226669999421574,
+            "mean_ms": 1.5613154277421668,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 1.5363749989774078,
+            "min_ms": 1.5248329946189187,
+            "max_ms": 1.9155830013914965,
+            "mean_ms": 1.5919344285586183,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 1.5578750026179478,
+            "min_ms": 1.5519160006078891,
+            "max_ms": 2.019749997998588,
+            "mean_ms": 1.6239167151590144,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 1.512834001914598,
+            "min_ms": 1.4975410012993962,
+            "max_ms": 1.8825419974746183,
+            "mean_ms": 1.5722438578710094,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 2.23,
+          "speedup_adapter_lc_vs_lc": 2.19,
+          "overhead_lc_pct": 1.63,
+          "overhead_li_pct": 3.05,
+          "overhead_ag_pct": 0.07
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 42.101208004169166,
+            "min_ms": 39.46479200385511,
+            "max_ms": 42.87570900487481,
+            "mean_ms": 41.48056967096636,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 17.82558400009293,
+            "min_ms": 17.50579199870117,
+            "max_ms": 18.430208001518622,
+            "mean_ms": 17.92052800010424,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 17.571457996382378,
+            "min_ms": 17.289292001805734,
+            "max_ms": 17.72079199872678,
+            "mean_ms": 17.527180665638298,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 17.973000001802575,
+            "min_ms": 17.93024999642512,
+            "max_ms": 18.558625000878237,
+            "mean_ms": 18.15395833303531,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 17.6414589950582,
+            "min_ms": 17.522875001304783,
+            "max_ms": 17.973791000258643,
+            "mean_ms": 17.71270833220721,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 2.36,
+          "speedup_adapter_lc_vs_lc": 2.4,
+          "overhead_lc_pct": -1.43,
+          "overhead_li_pct": 0.83,
+          "overhead_ag_pct": -1.03
+        }
+      }
+    },
+    "500_50": {
+      "plain": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.0035000048228539526,
+            "min_ms": 0.003416993422433734,
+            "max_ms": 0.0036670026020146906,
+            "mean_ms": 0.003523320483509451,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.00145800004247576,
+            "min_ms": 0.001415995939169079,
+            "max_ms": 0.0015420009731315076,
+            "mean_ms": 0.0014550602645613253,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.0014170000213198364,
+            "min_ms": 0.0013749959180131555,
+            "max_ms": 0.0015830009942874312,
+            "mean_ms": 0.001432659919373691,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.012666001566685736,
+            "min_ms": 0.012500000593718141,
+            "max_ms": 0.013459000911097974,
+            "mean_ms": 0.012735859490931034,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.0014170000213198364,
+            "min_ms": 0.001334003172814846,
+            "max_ms": 0.001500004145782441,
+            "mean_ms": 0.0014332802675198764,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 2.4,
+          "speedup_adapter_lc_vs_lc": 2.47,
+          "overhead_lc_pct": -2.81,
+          "overhead_li_pct": 768.72,
+          "overhead_ag_pct": -2.81
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.018312497559236363,
+            "min_ms": 0.018207996618002653,
+            "max_ms": 0.018417005776427686,
+            "mean_ms": 0.0183109662126905,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.009249997674487531,
+            "min_ms": 0.009166004019789398,
+            "max_ms": 0.009292001777794212,
+            "mean_ms": 0.00923609962531676,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.009292001777794212,
+            "min_ms": 0.00920799357118085,
+            "max_ms": 0.012167001841589808,
+            "mean_ms": 0.009469465779451033,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.020916497305734083,
+            "min_ms": 0.020708997908513993,
+            "max_ms": 0.021957996068522334,
+            "mean_ms": 0.021027766342740506,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.009583000064594671,
+            "min_ms": 0.009250004950445145,
+            "max_ms": 0.02633300027810037,
+            "mean_ms": 0.0104848004411906,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 1.98,
+          "speedup_adapter_lc_vs_lc": 1.97,
+          "overhead_lc_pct": 0.45,
+          "overhead_li_pct": 126.12,
+          "overhead_ag_pct": 3.6
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.17304100038018078,
+            "min_ms": 0.17266599752474576,
+            "max_ms": 0.17658400611253455,
+            "mean_ms": 0.17361099986980358,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.08470899774692953,
+            "min_ms": 0.08454199996776879,
+            "max_ms": 0.08562499715480953,
+            "mean_ms": 0.08479159975346799,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.09208299888996407,
+            "min_ms": 0.08587499905843288,
+            "max_ms": 0.1592920016264543,
+            "mean_ms": 0.09817786728187154,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.1009580009849742,
+            "min_ms": 0.09675000183051452,
+            "max_ms": 0.1245419989572838,
+            "mean_ms": 0.10275539971189573,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.08441699901595712,
+            "min_ms": 0.08420800440944731,
+            "max_ms": 0.0867080016178079,
+            "mean_ms": 0.08457226601118843,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 2.04,
+          "speedup_adapter_lc_vs_lc": 1.88,
+          "overhead_lc_pct": 8.71,
+          "overhead_li_pct": 19.18,
+          "overhead_ag_pct": -0.34
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 1.83229200047208,
+            "min_ms": 1.7873750039143488,
+            "max_ms": 1.9366249980521388,
+            "mean_ms": 1.8372084284367571,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.8443749975413084,
+            "min_ms": 0.8357920014532283,
+            "max_ms": 1.0634579957695678,
+            "mean_ms": 0.889357140944672,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.8382079977309331,
+            "min_ms": 0.8337919935001992,
+            "max_ms": 0.8809170030872338,
+            "mean_ms": 0.8434465697584008,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.9090829989872873,
+            "min_ms": 0.8497919989167713,
+            "max_ms": 1.0369579977123067,
+            "mean_ms": 0.9164225713383141,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.843084002553951,
+            "min_ms": 0.8339589985553175,
+            "max_ms": 0.8551669961889274,
+            "mean_ms": 0.8429108565906063,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 2.17,
+          "speedup_adapter_lc_vs_lc": 2.19,
+          "overhead_lc_pct": -0.73,
+          "overhead_li_pct": 7.66,
+          "overhead_ag_pct": -0.15
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 22.896166999998968,
+            "min_ms": 22.801042003266048,
+            "max_ms": 23.136291005357634,
+            "mean_ms": 22.944500002874218,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 10.285124997608364,
+            "min_ms": 10.165959000005387,
+            "max_ms": 10.325790994102135,
+            "mean_ms": 10.258958330571962,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 10.238582995953038,
+            "min_ms": 10.102832995471545,
+            "max_ms": 10.47241599735571,
+            "mean_ms": 10.271277329593431,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 10.146291002456564,
+            "min_ms": 10.083041001053061,
+            "max_ms": 10.467291001987178,
+            "mean_ms": 10.232207668498935,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 10.192834000918083,
+            "min_ms": 10.053375001007225,
+            "max_ms": 10.32229200063739,
+            "mean_ms": 10.189500334187565,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 2.23,
+          "speedup_adapter_lc_vs_lc": 2.24,
+          "overhead_lc_pct": -0.45,
+          "overhead_li_pct": -1.35,
+          "overhead_ag_pct": -0.9
+        }
+      },
+      "markdown": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.006207999831531197,
+            "min_ms": 0.006124995707068592,
+            "max_ms": 0.006416004907805473,
+            "mean_ms": 0.006209819985087961,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.0017910024325829,
+            "min_ms": 0.0017499987734481692,
+            "max_ms": 0.001958003849722445,
+            "mean_ms": 0.0017949397442862391,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.0018329956219531596,
+            "min_ms": 0.0017909987946040928,
+            "max_ms": 0.0018749997252598405,
+            "mean_ms": 0.00181750045157969,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.01354100095340982,
+            "min_ms": 0.012958997103851289,
+            "max_ms": 0.014582998119294643,
+            "mean_ms": 0.013598319928860292,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.0018330028979107738,
+            "min_ms": 0.001791995600797236,
+            "max_ms": 0.0019170038285665214,
+            "mean_ms": 0.0018457607075106353,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 3.47,
+          "speedup_adapter_lc_vs_lc": 3.39,
+          "overhead_lc_pct": 2.34,
+          "overhead_li_pct": 656.06,
+          "overhead_ag_pct": 2.35
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.049250000301981345,
+            "min_ms": 0.04891600110568106,
+            "max_ms": 0.04983400140190497,
+            "mean_ms": 0.049298566833992176,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.013541997759602964,
+            "min_ms": 0.013499993656296283,
+            "max_ms": 0.013624994608107954,
+            "mean_ms": 0.013543066112712646,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.013584001862909645,
+            "min_ms": 0.013500000932253897,
+            "max_ms": 0.016250000044237822,
+            "mean_ms": 0.013785899985426417,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.025520501367282122,
+            "min_ms": 0.025375004042871296,
+            "max_ms": 0.025875000574160367,
+            "mean_ms": 0.025544366993320484,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.013542005035560578,
+            "min_ms": 0.013499993656296283,
+            "max_ms": 0.013625001884065568,
+            "mean_ms": 0.013558400193384538,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 3.64,
+          "speedup_adapter_lc_vs_lc": 3.63,
+          "overhead_lc_pct": 0.31,
+          "overhead_li_pct": 88.45,
+          "overhead_ag_pct": 0.0
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.48054199578473344,
+            "min_ms": 0.4784170014318079,
+            "max_ms": 0.5163750029169023,
+            "mean_ms": 0.4836139327380806,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.12695800251094624,
+            "min_ms": 0.12583300122059882,
+            "max_ms": 0.18012500368058681,
+            "mean_ms": 0.13171406753826886,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.12520800373749807,
+            "min_ms": 0.12491599773056805,
+            "max_ms": 0.14070799807086587,
+            "mean_ms": 0.12623319829193255,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.13829200179316103,
+            "min_ms": 0.1369579986203462,
+            "max_ms": 0.14054199709789827,
+            "mean_ms": 0.13858073216397315,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.12874999811174348,
+            "min_ms": 0.12675000471062958,
+            "max_ms": 0.1686670002527535,
+            "mean_ms": 0.13317233339572945,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 3.79,
+          "speedup_adapter_lc_vs_lc": 3.84,
+          "overhead_lc_pct": -1.38,
+          "overhead_li_pct": 8.93,
+          "overhead_ag_pct": 1.41
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 4.936249999445863,
+            "min_ms": 4.829124998650514,
+            "max_ms": 5.123666000145022,
+            "mean_ms": 4.945547427009193,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 1.2342919944785535,
+            "min_ms": 1.2097500002710149,
+            "max_ms": 1.3657500021508895,
+            "mean_ms": 1.2538214276511488,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 1.2488339998526499,
+            "min_ms": 1.225957996211946,
+            "max_ms": 1.3327919950825162,
+            "mean_ms": 1.2534882854587133,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 1.247334002982825,
+            "min_ms": 1.2329579985816963,
+            "max_ms": 1.4394579993677326,
+            "mean_ms": 1.279505857382901,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 1.2152089984738268,
+            "min_ms": 1.2027080010739155,
+            "max_ms": 1.2319579982431605,
+            "mean_ms": 1.217637000081595,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 4.0,
+          "speedup_adapter_lc_vs_lc": 3.95,
+          "overhead_lc_pct": 1.18,
+          "overhead_li_pct": 1.06,
+          "overhead_ag_pct": -1.55
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 56.55991700041341,
+            "min_ms": 56.553374997747596,
+            "max_ms": 56.876292001106776,
+            "mean_ms": 56.66319466642259,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 14.406167007109616,
+            "min_ms": 14.329833000374492,
+            "max_ms": 15.003999993496109,
+            "mean_ms": 14.58000000032674,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 14.62162499956321,
+            "min_ms": 14.31991699791979,
+            "max_ms": 15.06087499728892,
+            "mean_ms": 14.66747233159064,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 14.543457997206133,
+            "min_ms": 14.40629200078547,
+            "max_ms": 14.578959002392367,
+            "mean_ms": 14.509569666794656,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 14.497582997137215,
+            "min_ms": 14.227708001271822,
+            "max_ms": 14.60058399970876,
+            "mean_ms": 14.441958332705932,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 3.93,
+          "speedup_adapter_lc_vs_lc": 3.87,
+          "overhead_lc_pct": 1.5,
+          "overhead_li_pct": 0.95,
+          "overhead_ag_pct": 0.63
+        }
+      },
+      "source_code": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.004374996933620423,
+            "min_ms": 0.004249995981808752,
+            "max_ms": 0.004542001988738775,
+            "mean_ms": 0.004357519937912002,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.0015839978004805744,
+            "min_ms": 0.0015420009731315076,
+            "max_ms": 0.0017500060494057834,
+            "mean_ms": 0.001602600677870214,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.0016045014490373433,
+            "min_ms": 0.0015410041669383645,
+            "max_ms": 0.001667001924943179,
+            "mean_ms": 0.0016041600611060858,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.013165998097974807,
+            "min_ms": 0.012874996173195541,
+            "max_ms": 0.01383299968438223,
+            "mean_ms": 0.013196539803175256,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.001624997821636498,
+            "min_ms": 0.0015419936971738935,
+            "max_ms": 0.001667001924943179,
+            "mean_ms": 0.001616620138520375,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 2.76,
+          "speedup_adapter_lc_vs_lc": 2.73,
+          "overhead_lc_pct": 1.29,
+          "overhead_li_pct": 731.19,
+          "overhead_ag_pct": 2.59
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.027541500458028167,
+            "min_ms": 0.027292000595480204,
+            "max_ms": 0.027999994927085936,
+            "mean_ms": 0.027559632871998474,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.010875002772081643,
+            "min_ms": 0.010750001820269972,
+            "max_ms": 0.011083000572398305,
+            "mean_ms": 0.010879200029497346,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.010916002793237567,
+            "min_ms": 0.010832998668774962,
+            "max_ms": 0.0109999964479357,
+            "mean_ms": 0.010912433450963968,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.022833002731204033,
+            "min_ms": 0.022499996703118086,
+            "max_ms": 0.02329199924133718,
+            "mean_ms": 0.022855533461552113,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.010916002793237567,
+            "min_ms": 0.01087499549612403,
+            "max_ms": 0.011042000551242381,
+            "mean_ms": 0.010917965846601874,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 2.53,
+          "speedup_adapter_lc_vs_lc": 2.52,
+          "overhead_lc_pct": 0.38,
+          "overhead_li_pct": 109.96,
+          "overhead_ag_pct": 0.38
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.2675420037121512,
+            "min_ms": 0.26045800041174516,
+            "max_ms": 0.2804590039886534,
+            "mean_ms": 0.2687611335810895,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.10079200001200661,
+            "min_ms": 0.10058299812953919,
+            "max_ms": 0.10412499977974221,
+            "mean_ms": 0.10101679896858211,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.10116599878529087,
+            "min_ms": 0.1009580009849742,
+            "max_ms": 0.10141699749510735,
+            "mean_ms": 0.10118319866402696,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.11387500126147643,
+            "min_ms": 0.11270799586782232,
+            "max_ms": 0.13279199629323557,
+            "mean_ms": 0.1164860669329452,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.10124999971594661,
+            "min_ms": 0.10095899779116735,
+            "max_ms": 0.10158299846807495,
+            "mean_ms": 0.10123346631492798,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 2.65,
+          "speedup_adapter_lc_vs_lc": 2.64,
+          "overhead_lc_pct": 0.37,
+          "overhead_li_pct": 12.98,
+          "overhead_ag_pct": 0.45
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 2.8139590067439713,
+            "min_ms": 2.7910420030821115,
+            "max_ms": 3.0092500019236468,
+            "mean_ms": 2.8440118590619283,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.9934589979820885,
+            "min_ms": 0.979208001808729,
+            "max_ms": 1.1367920014890842,
+            "mean_ms": 1.0115715724948262,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 1.008457998977974,
+            "min_ms": 0.9977080044336617,
+            "max_ms": 1.0854580032173544,
+            "mean_ms": 1.019291430046516,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 1.0054160011350177,
+            "min_ms": 0.9948750011972152,
+            "max_ms": 1.0328339994885027,
+            "mean_ms": 1.0104164300303506,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 1.0274580054101534,
+            "min_ms": 0.9858329940470867,
+            "max_ms": 12.802500001271255,
+            "mean_ms": 3.021398857526947,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 2.83,
+          "speedup_adapter_lc_vs_lc": 2.79,
+          "overhead_lc_pct": 1.51,
+          "overhead_li_pct": 1.2,
+          "overhead_ag_pct": 3.42
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 34.57708400674164,
+            "min_ms": 34.03570899536135,
+            "max_ms": 34.801250003511086,
+            "mean_ms": 34.47134766853802,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 11.796999999205582,
+            "min_ms": 11.734542000340298,
+            "max_ms": 11.940541997319087,
+            "mean_ms": 11.824027998954989,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 12.116707999666687,
+            "min_ms": 11.979208000411745,
+            "max_ms": 12.348541000392288,
+            "mean_ms": 12.14815233349024,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 12.141375002101995,
+            "min_ms": 12.035500003548805,
+            "max_ms": 12.494292001065332,
+            "mean_ms": 12.223722335572043,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 11.999125003057998,
+            "min_ms": 11.941959004616365,
+            "max_ms": 12.054082995746285,
+            "mean_ms": 11.998389001140216,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 2.93,
+          "speedup_adapter_lc_vs_lc": 2.85,
+          "overhead_lc_pct": 2.71,
+          "overhead_li_pct": 2.92,
+          "overhead_ag_pct": 1.71
+        }
+      },
+      "unicode": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.005249996320344508,
+            "min_ms": 0.00508299854118377,
+            "max_ms": 0.00549999822396785,
+            "mean_ms": 0.005243300402071327,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.004374996933620423,
+            "min_ms": 0.004292000085115433,
+            "max_ms": 0.004708999767899513,
+            "mean_ms": 0.0043799603008665144,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.004374996933620423,
+            "min_ms": 0.004292000085115433,
+            "max_ms": 0.004417001036927104,
+            "mean_ms": 0.0043591600842773914,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.015833997167646885,
+            "min_ms": 0.015666999388486147,
+            "max_ms": 0.016792000678833574,
+            "mean_ms": 0.015933380491333082,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.004395504220155999,
+            "min_ms": 0.004292000085115433,
+            "max_ms": 0.004875000740867108,
+            "mean_ms": 0.0044517204514704645,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 1.2,
+          "speedup_adapter_lc_vs_lc": 1.2,
+          "overhead_lc_pct": 0.0,
+          "overhead_li_pct": 261.92,
+          "overhead_ag_pct": 0.47
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.037520501791732386,
+            "min_ms": 0.03716600622283295,
+            "max_ms": 0.05295799928717315,
+            "mean_ms": 0.03867493360303342,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.03902100070263259,
+            "min_ms": 0.037582998629659414,
+            "max_ms": 0.06179100455483422,
+            "mean_ms": 0.04030133398676602,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.03749999814317562,
+            "min_ms": 0.037417004932649434,
+            "max_ms": 0.03779200051212683,
+            "mean_ms": 0.03752226742411343,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.050374997954349965,
+            "min_ms": 0.04941600491292775,
+            "max_ms": 0.053208001190796494,
+            "mean_ms": 0.05041106681649884,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.0382705002266448,
+            "min_ms": 0.038124999264255166,
+            "max_ms": 0.04954200267093256,
+            "mean_ms": 0.03869449986571757,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 0.96,
+          "speedup_adapter_lc_vs_lc": 1.0,
+          "overhead_lc_pct": -3.9,
+          "overhead_li_pct": 29.1,
+          "overhead_ag_pct": -1.92
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.3762920023291372,
+            "min_ms": 0.3683749964693561,
+            "max_ms": 0.407457999244798,
+            "mean_ms": 0.3817944001639262,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.36329199792817235,
+            "min_ms": 0.36291700234869495,
+            "max_ms": 0.41283300379291177,
+            "mean_ms": 0.3679610672406852,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.3637080008047633,
+            "min_ms": 0.36337499477667734,
+            "max_ms": 0.3807090033660643,
+            "mean_ms": 0.3661306662252173,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.3791250055655837,
+            "min_ms": 0.3758329985430464,
+            "max_ms": 0.4411250047269277,
+            "mean_ms": 0.3866333994665183,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.37041599716758355,
+            "min_ms": 0.3631250001490116,
+            "max_ms": 0.4171250038780272,
+            "mean_ms": 0.37736099960360053,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 1.04,
+          "speedup_adapter_lc_vs_lc": 1.03,
+          "overhead_lc_pct": 0.11,
+          "overhead_li_pct": 4.36,
+          "overhead_ag_pct": 1.96
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 4.026875001727603,
+            "min_ms": 3.9939170019351877,
+            "max_ms": 4.3404169991845265,
+            "mean_ms": 4.07603585855603,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 3.765917004784569,
+            "min_ms": 3.7119999979040585,
+            "max_ms": 3.861540993966628,
+            "mean_ms": 3.7741487134813463,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 3.7464999986696057,
+            "min_ms": 3.7149580020923167,
+            "max_ms": 4.018291998363566,
+            "mean_ms": 3.803749856680432,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 3.833165996184107,
+            "min_ms": 3.7569580017589033,
+            "max_ms": 3.9460420011891983,
+            "mean_ms": 3.827970429223829,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 3.758333004952874,
+            "min_ms": 3.685750001750421,
+            "max_ms": 3.890542000590358,
+            "mean_ms": 3.775345429728207,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 1.07,
+          "speedup_adapter_lc_vs_lc": 1.07,
+          "overhead_lc_pct": -0.52,
+          "overhead_li_pct": 1.79,
+          "overhead_ag_pct": -0.2
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 54.38720800157171,
+            "min_ms": 54.24887499975739,
+            "max_ms": 55.7987919964944,
+            "mean_ms": 54.8116249992745,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 39.555625000502914,
+            "min_ms": 39.48008300358197,
+            "max_ms": 39.82170800009044,
+            "mean_ms": 39.61913866805844,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 39.90874999726657,
+            "min_ms": 39.705416005745064,
+            "max_ms": 40.14695899968501,
+            "mean_ms": 39.92037500089888,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 40.29325000010431,
+            "min_ms": 39.633957996557,
+            "max_ms": 40.35837500123307,
+            "mean_ms": 40.09519433263146,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 39.71983300289139,
+            "min_ms": 39.43333299685037,
+            "max_ms": 40.21916700003203,
+            "mean_ms": 39.79077766659126,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 1.37,
+          "speedup_adapter_lc_vs_lc": 1.36,
+          "overhead_lc_pct": 0.89,
+          "overhead_li_pct": 1.86,
+          "overhead_ag_pct": 0.42
+        }
+      },
+      "emoji": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.004832996637560427,
+            "min_ms": 0.004749999789055437,
+            "max_ms": 0.005000001692678779,
+            "mean_ms": 0.004823339841095731,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.0023750035325065255,
+            "min_ms": 0.0023329994291998446,
+            "max_ms": 0.002458000381011516,
+            "mean_ms": 0.002375720359850675,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.0023750035325065255,
+            "min_ms": 0.0023329994291998446,
+            "max_ms": 0.0024999972083605826,
+            "mean_ms": 0.0023783599317539483,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.014125002053333446,
+            "min_ms": 0.013958000636193901,
+            "max_ms": 0.014833996829111129,
+            "mean_ms": 0.014199099532561377,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.0023750035325065255,
+            "min_ms": 0.0023329994291998446,
+            "max_ms": 0.002459004463162273,
+            "mean_ms": 0.002388319408055395,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 2.03,
+          "speedup_adapter_lc_vs_lc": 2.03,
+          "overhead_lc_pct": 0.0,
+          "overhead_li_pct": 494.74,
+          "overhead_ag_pct": 0.0
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.03491700044833124,
+            "min_ms": 0.03470799856586382,
+            "max_ms": 0.04345799970906228,
+            "mean_ms": 0.035219466856991254,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.019832998077617958,
+            "min_ms": 0.01974999759113416,
+            "max_ms": 0.03112500417046249,
+            "mean_ms": 0.020201466638051595,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.019874998542945832,
+            "min_ms": 0.01974999759113416,
+            "max_ms": 0.03445900074439123,
+            "mean_ms": 0.020537433253290754,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.03204099994036369,
+            "min_ms": 0.031791001674719155,
+            "max_ms": 0.03429199568927288,
+            "mean_ms": 0.03224989923182875,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.020083498384337872,
+            "min_ms": 0.01974999759113416,
+            "max_ms": 0.0212500017369166,
+            "mean_ms": 0.020224966525953885,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 1.76,
+          "speedup_adapter_lc_vs_lc": 1.76,
+          "overhead_lc_pct": 0.21,
+          "overhead_li_pct": 61.55,
+          "overhead_ag_pct": 1.26
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.34720899566309527,
+            "min_ms": 0.3348339960211888,
+            "max_ms": 0.44012499711243436,
+            "mean_ms": 0.3568277980472582,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.18729199655354023,
+            "min_ms": 0.18641699716681615,
+            "max_ms": 0.20683299953816459,
+            "mean_ms": 0.18962226555837938,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.1832919951993972,
+            "min_ms": 0.18295899644726887,
+            "max_ms": 0.19241699919803068,
+            "mean_ms": 0.18389173346804455,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.2012089971685782,
+            "min_ms": 0.1956249980139546,
+            "max_ms": 0.23883300309535116,
+            "mean_ms": 0.20788026692268127,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.1833749993238598,
+            "min_ms": 0.18316700152354315,
+            "max_ms": 0.18679100321605802,
+            "mean_ms": 0.18436653384317955,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 1.85,
+          "speedup_adapter_lc_vs_lc": 1.89,
+          "overhead_lc_pct": -2.14,
+          "overhead_li_pct": 7.43,
+          "overhead_ag_pct": -2.09
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 3.569332999177277,
+            "min_ms": 3.445374997681938,
+            "max_ms": 3.7585829995805398,
+            "mean_ms": 3.5961485690287582,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 1.86162499448983,
+            "min_ms": 1.825166997150518,
+            "max_ms": 1.9790410005953163,
+            "mean_ms": 1.8873095697407345,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 1.8941659945994616,
+            "min_ms": 1.86329099960858,
+            "max_ms": 2.015999998548068,
+            "mean_ms": 1.932696283412432,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 1.9411250032135285,
+            "min_ms": 1.8793339986586943,
+            "max_ms": 2.0696249994216487,
+            "mean_ms": 1.9451787125685118,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 1.8656669999472797,
+            "min_ms": 1.857999995991122,
+            "max_ms": 2.1884169982513413,
+            "mean_ms": 1.9158215717262854,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 1.92,
+          "speedup_adapter_lc_vs_lc": 1.88,
+          "overhead_lc_pct": 1.75,
+          "overhead_li_pct": 4.27,
+          "overhead_ag_pct": 0.22
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 46.092500000668224,
+            "min_ms": 44.68174999783514,
+            "max_ms": 46.479958000418264,
+            "mean_ms": 45.75140266630721,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 21.241000002191868,
+            "min_ms": 20.792750001419336,
+            "max_ms": 21.271749996230938,
+            "mean_ms": 21.101833333280712,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 21.474083005159628,
+            "min_ms": 20.672999999078456,
+            "max_ms": 21.55658400442917,
+            "mean_ms": 21.23455566955575,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 21.106457999849226,
+            "min_ms": 20.6980420043692,
+            "max_ms": 21.49045799887972,
+            "mean_ms": 21.09831933436605,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 21.618250000756234,
+            "min_ms": 20.809624998946674,
+            "max_ms": 21.652791001542937,
+            "mean_ms": 21.36022200041528,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 2.17,
+          "speedup_adapter_lc_vs_lc": 2.15,
+          "overhead_lc_pct": 1.1,
+          "overhead_li_pct": -0.63,
+          "overhead_ag_pct": 1.78
+        }
+      }
+    },
+    "2000_200": {
+      "plain": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.003083001502091065,
+            "min_ms": 0.0030000010156072676,
+            "max_ms": 0.0031669987947680056,
+            "mean_ms": 0.0030807600705884397,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.001291002263315022,
+            "min_ms": 0.0012079981388524175,
+            "max_ms": 0.0014170000213198364,
+            "mean_ms": 0.0012749996676575392,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.0012919990695081651,
+            "min_ms": 0.0012499949662014842,
+            "max_ms": 0.001334003172814846,
+            "mean_ms": 0.0012899396824650466,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.012625001545529813,
+            "min_ms": 0.012333002814557403,
+            "max_ms": 0.028124995878897607,
+            "mean_ms": 0.013534120080294088,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.0013750031939707696,
+            "min_ms": 0.0012909949873574078,
+            "max_ms": 0.009625000529922545,
+            "mean_ms": 0.0015499400615226477,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 2.39,
+          "speedup_adapter_lc_vs_lc": 2.39,
+          "overhead_lc_pct": 0.08,
+          "overhead_li_pct": 877.92,
+          "overhead_ag_pct": 6.51
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.016625002899672836,
+            "min_ms": 0.016500001947861165,
+            "max_ms": 0.016917001630645245,
+            "mean_ms": 0.016641634041055415,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.007791000825818628,
+            "min_ms": 0.0077500008046627045,
+            "max_ms": 0.007834001735318452,
+            "mean_ms": 0.007786067726556212,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.007792004907969385,
+            "min_ms": 0.0077500008046627045,
+            "max_ms": 0.007834001735318452,
+            "mean_ms": 0.007800167077220976,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.019374998373677954,
+            "min_ms": 0.01920799695653841,
+            "max_ms": 0.0197910048882477,
+            "mean_ms": 0.019390133578175057,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.007833001291146502,
+            "min_ms": 0.007791000825818628,
+            "max_ms": 0.007957998604979366,
+            "mean_ms": 0.007837333638841907,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 2.13,
+          "speedup_adapter_lc_vs_lc": 2.13,
+          "overhead_lc_pct": 0.01,
+          "overhead_li_pct": 148.68,
+          "overhead_ag_pct": 0.54
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.16054199659265578,
+            "min_ms": 0.15741699462523684,
+            "max_ms": 0.18520800222177058,
+            "mean_ms": 0.16399999973752225,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.0711250031599775,
+            "min_ms": 0.07104199903551489,
+            "max_ms": 0.07375000132014975,
+            "mean_ms": 0.07132486692474534,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.07124999683583155,
+            "min_ms": 0.07108400313882157,
+            "max_ms": 0.08595899998908862,
+            "mean_ms": 0.0735028661438264,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.08362499647773802,
+            "min_ms": 0.08354100282303989,
+            "max_ms": 0.0840419961605221,
+            "mean_ms": 0.0836944003822282,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.07129099685698748,
+            "min_ms": 0.07104199903551489,
+            "max_ms": 0.0844590031192638,
+            "mean_ms": 0.07245546585181728,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 2.26,
+          "speedup_adapter_lc_vs_lc": 2.25,
+          "overhead_lc_pct": 0.18,
+          "overhead_li_pct": 17.57,
+          "overhead_ag_pct": 0.23
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 1.5878339982009493,
+            "min_ms": 1.5539160012849607,
+            "max_ms": 1.61975000082748,
+            "mean_ms": 1.5900535727269016,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.7237500030896626,
+            "min_ms": 0.720458003343083,
+            "max_ms": 0.7604160055052489,
+            "mean_ms": 0.734690429193766,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.7197080049081706,
+            "min_ms": 0.7067080005072057,
+            "max_ms": 0.8371669973712415,
+            "mean_ms": 0.7336725715764,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.7498330014641397,
+            "min_ms": 0.7311669978662394,
+            "max_ms": 0.7657499954802915,
+            "mean_ms": 0.7471665698436222,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.7155420025810599,
+            "min_ms": 0.7033330039121211,
+            "max_ms": 0.8047079973039217,
+            "mean_ms": 0.7393452854427908,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 2.19,
+          "speedup_adapter_lc_vs_lc": 2.21,
+          "overhead_lc_pct": -0.56,
+          "overhead_li_pct": 3.6,
+          "overhead_ag_pct": -1.13
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 21.078707999549806,
+            "min_ms": 20.592665998265147,
+            "max_ms": 22.238500001549255,
+            "mean_ms": 21.303291333121404,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 7.894750000559725,
+            "min_ms": 7.813832999090664,
+            "max_ms": 8.673749995068647,
+            "mean_ms": 8.127444331573011,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 12.1671660017455,
+            "min_ms": 8.400375001656357,
+            "max_ms": 22.13612500054296,
+            "mean_ms": 14.234555334648272,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 8.336624996445607,
+            "min_ms": 8.31941700016614,
+            "max_ms": 8.435000003373716,
+            "mean_ms": 8.363680666661821,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 8.104957996692974,
+            "min_ms": 7.998458000656683,
+            "max_ms": 8.579666995501611,
+            "mean_ms": 8.227694330950422,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 2.67,
+          "speedup_adapter_lc_vs_lc": 1.73,
+          "overhead_lc_pct": 54.12,
+          "overhead_li_pct": 5.6,
+          "overhead_ag_pct": 2.66
+        }
+      },
+      "markdown": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.004916997568216175,
+            "min_ms": 0.004833003913518041,
+            "max_ms": 0.00508299854118377,
+            "mean_ms": 0.0049324994324706495,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.0017499987734481692,
+            "min_ms": 0.001624997821636498,
+            "max_ms": 0.014666999049950391,
+            "mean_ms": 0.00197162022232078,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.0016250050975941122,
+            "min_ms": 0.0015830009942874312,
+            "max_ms": 0.0017499987734481692,
+            "mean_ms": 0.0016449599934276193,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.013042001228313893,
+            "min_ms": 0.012915996194351465,
+            "max_ms": 0.02304099325556308,
+            "mean_ms": 0.013502419606084004,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.0016660051187500358,
+            "min_ms": 0.0015839978004805744,
+            "max_ms": 0.0017499987734481692,
+            "mean_ms": 0.0016608205623924732,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 2.81,
+          "speedup_adapter_lc_vs_lc": 3.03,
+          "overhead_lc_pct": -7.14,
+          "overhead_li_pct": 645.26,
+          "overhead_ag_pct": -4.8
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.04772949978359975,
+            "min_ms": 0.047124995035119355,
+            "max_ms": 0.058707999414764345,
+            "mean_ms": 0.048060965491458774,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.011249998351559043,
+            "min_ms": 0.011165997420903295,
+            "max_ms": 0.011459000234026462,
+            "mean_ms": 0.011255466233706102,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.011270502000115812,
+            "min_ms": 0.011207994248252362,
+            "max_ms": 0.01200000406242907,
+            "mean_ms": 0.011352732690284029,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.022958003683015704,
+            "min_ms": 0.02274999860674143,
+            "max_ms": 0.026875000912696123,
+            "mean_ms": 0.023174833283216383,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.011291504051769152,
+            "min_ms": 0.011167001503054053,
+            "max_ms": 0.012084004993084818,
+            "mean_ms": 0.011379234153234089,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 4.24,
+          "speedup_adapter_lc_vs_lc": 4.23,
+          "overhead_lc_pct": 0.18,
+          "overhead_li_pct": 104.07,
+          "overhead_ag_pct": 0.37
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.46816599933663383,
+            "min_ms": 0.46395800018217415,
+            "max_ms": 0.4864169968641363,
+            "mean_ms": 0.47130266660436365,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.11487499432405457,
+            "min_ms": 0.11337499745422974,
+            "max_ms": 0.2531669961172156,
+            "mean_ms": 0.13586119894171134,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.1111250021494925,
+            "min_ms": 0.1102499954868108,
+            "max_ms": 0.1269999993382953,
+            "mean_ms": 0.11284439970040694,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.12220799544593319,
+            "min_ms": 0.12091700045857579,
+            "max_ms": 0.1263329977518879,
+            "mean_ms": 0.12273066580140342,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.11887499567819759,
+            "min_ms": 0.11216599523322657,
+            "max_ms": 0.24700000358279794,
+            "mean_ms": 0.13397500006249174,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 4.08,
+          "speedup_adapter_lc_vs_lc": 4.21,
+          "overhead_lc_pct": -3.26,
+          "overhead_li_pct": 6.38,
+          "overhead_ag_pct": 3.48
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 4.9338749959133565,
+            "min_ms": 4.805000004125759,
+            "max_ms": 5.660499999066815,
+            "mean_ms": 5.093196427748937,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 1.1244999986956827,
+            "min_ms": 1.0650410040398128,
+            "max_ms": 1.3973329987493344,
+            "mean_ms": 1.168749857502657,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 1.1137910041725263,
+            "min_ms": 1.0845419965335168,
+            "max_ms": 1.1673339977278374,
+            "mean_ms": 1.1193512857841728,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 1.1028330045519397,
+            "min_ms": 1.0895830055233091,
+            "max_ms": 1.1145829994347878,
+            "mean_ms": 1.1011307152719902,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 1.0859999965759926,
+            "min_ms": 1.0630420001689345,
+            "max_ms": 1.6577080023125745,
+            "mean_ms": 1.1735060023576287,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 4.39,
+          "speedup_adapter_lc_vs_lc": 4.43,
+          "overhead_lc_pct": -0.95,
+          "overhead_li_pct": -1.93,
+          "overhead_ag_pct": -3.42
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 55.957292002858594,
+            "min_ms": 54.13199999748031,
+            "max_ms": 75.62183399568312,
+            "mean_ms": 61.90370866534067,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 12.366792005195748,
+            "min_ms": 11.981290997937322,
+            "max_ms": 12.80962499731686,
+            "mean_ms": 12.385902666816643,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 12.042624999594409,
+            "min_ms": 11.711500003002584,
+            "max_ms": 12.090541997167747,
+            "mean_ms": 11.948222333254913,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 11.702499999955762,
+            "min_ms": 11.59324999753153,
+            "max_ms": 12.384250003378838,
+            "mean_ms": 11.893333333622044,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 11.849834001623094,
+            "min_ms": 11.501417000545189,
+            "max_ms": 12.328457996773068,
+            "mean_ms": 11.89323633298045,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 4.52,
+          "speedup_adapter_lc_vs_lc": 4.65,
+          "overhead_lc_pct": -2.62,
+          "overhead_li_pct": -5.37,
+          "overhead_ag_pct": -4.18
+        }
+      },
+      "source_code": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.003625005774665624,
+            "min_ms": 0.003582994395401329,
+            "max_ms": 0.0038330035749822855,
+            "mean_ms": 0.0036582401662599295,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.0014170000213198364,
+            "min_ms": 0.001334003172814846,
+            "max_ms": 0.0016659978427924216,
+            "mean_ms": 0.0014208801439963281,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.0014170000213198364,
+            "min_ms": 0.0013749959180131555,
+            "max_ms": 0.0014999968698248267,
+            "mean_ms": 0.0014182401355355978,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.01270800203201361,
+            "min_ms": 0.012459000572562218,
+            "max_ms": 0.030834002245683223,
+            "mean_ms": 0.013550840085372329,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.0014170000213198364,
+            "min_ms": 0.0013749959180131555,
+            "max_ms": 0.0014999968698248267,
+            "mean_ms": 0.0014258195005822927,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 2.56,
+          "speedup_adapter_lc_vs_lc": 2.56,
+          "overhead_lc_pct": 0.0,
+          "overhead_li_pct": 796.82,
+          "overhead_ag_pct": 0.0
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.02547899930505082,
+            "min_ms": 0.02433299960102886,
+            "max_ms": 0.03104100323980674,
+            "mean_ms": 0.02571393318551903,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.00908400397747755,
+            "min_ms": 0.008999995770864189,
+            "max_ms": 0.018375001673121005,
+            "mean_ms": 0.009416533672871688,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.00908400397747755,
+            "min_ms": 0.00904199987417087,
+            "max_ms": 0.009165996743831784,
+            "mean_ms": 0.009099966943419227,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.020874998881481588,
+            "min_ms": 0.02058300015050918,
+            "max_ms": 0.03374999505467713,
+            "mean_ms": 0.021388900010303285,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.009291004971601069,
+            "min_ms": 0.009249997674487531,
+            "max_ms": 0.009375005902256817,
+            "mean_ms": 0.009284766323010748,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 2.8,
+          "speedup_adapter_lc_vs_lc": 2.8,
+          "overhead_lc_pct": 0.0,
+          "overhead_li_pct": 129.8,
+          "overhead_ag_pct": 2.28
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.26095800421899185,
+            "min_ms": 0.2463329947204329,
+            "max_ms": 0.3082910043303855,
+            "mean_ms": 0.26547493374285597,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.08758300100453198,
+            "min_ms": 0.0867080016178079,
+            "max_ms": 0.1003340003080666,
+            "mean_ms": 0.0906528012516598,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.0857499981066212,
+            "min_ms": 0.08558399713365361,
+            "max_ms": 0.08870899910107255,
+            "mean_ms": 0.08597773363968979,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.09891600348055363,
+            "min_ms": 0.097999996796716,
+            "max_ms": 0.12758299999404699,
+            "mean_ms": 0.10240820023075987,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.08529100159648806,
+            "min_ms": 0.08512499334756285,
+            "max_ms": 0.11191600060556084,
+            "mean_ms": 0.08775273308856413,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 2.98,
+          "speedup_adapter_lc_vs_lc": 3.04,
+          "overhead_lc_pct": -2.09,
+          "overhead_li_pct": 12.94,
+          "overhead_ag_pct": -2.62
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 2.6569159963401034,
+            "min_ms": 2.562749999924563,
+            "max_ms": 3.124749993730802,
+            "mean_ms": 2.7209701428156614,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.8529589977115393,
+            "min_ms": 0.8467080042464659,
+            "max_ms": 1.238708005985245,
+            "mean_ms": 0.9266844312410935,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.8472919944324531,
+            "min_ms": 0.8465419959975407,
+            "max_ms": 0.8783329976722598,
+            "mean_ms": 0.8519642838759215,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.910082999325823,
+            "min_ms": 0.8575000028940849,
+            "max_ms": 0.9259590005967766,
+            "mean_ms": 0.8955477158971397,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.8593329985160381,
+            "min_ms": 0.843249996250961,
+            "max_ms": 0.9208749979734421,
+            "mean_ms": 0.8650889981903934,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 3.11,
+          "speedup_adapter_lc_vs_lc": 3.14,
+          "overhead_lc_pct": -0.66,
+          "overhead_li_pct": 6.7,
+          "overhead_ag_pct": 0.75
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 33.38854199682828,
+            "min_ms": 33.272708002186846,
+            "max_ms": 33.564165998541284,
+            "mean_ms": 33.40847199918547,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 9.773999998287763,
+            "min_ms": 9.699249996629078,
+            "max_ms": 10.282417002599686,
+            "mean_ms": 9.918555665838843,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 9.840624996286351,
+            "min_ms": 9.709124999062624,
+            "max_ms": 10.341499997593928,
+            "mean_ms": 9.963749997647634,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 9.897166994051076,
+            "min_ms": 9.842040999501478,
+            "max_ms": 10.370124997280072,
+            "mean_ms": 10.036444330277542,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 9.838250000029802,
+            "min_ms": 9.755874998518266,
+            "max_ms": 10.170791996642947,
+            "mean_ms": 9.921638998397006,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 3.42,
+          "speedup_adapter_lc_vs_lc": 3.39,
+          "overhead_lc_pct": 0.68,
+          "overhead_li_pct": 1.26,
+          "overhead_ag_pct": 0.66
+        }
+      },
+      "unicode": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.004207999154459685,
+            "min_ms": 0.0041249950299970806,
+            "max_ms": 0.004417001036927104,
+            "mean_ms": 0.004200839175609872,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.003916997229680419,
+            "min_ms": 0.003874993126373738,
+            "max_ms": 0.0041669991333037615,
+            "mean_ms": 0.003921740135410801,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.003917004505638033,
+            "min_ms": 0.0038750004023313522,
+            "max_ms": 0.0040000013541430235,
+            "mean_ms": 0.003935860004276037,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.015354500646935776,
+            "min_ms": 0.015124998753890395,
+            "max_ms": 0.016250000044237822,
+            "mean_ms": 0.015414039953611791,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.003937500878237188,
+            "min_ms": 0.0038750004023313522,
+            "max_ms": 0.0040000013541430235,
+            "mean_ms": 0.003935659769922495,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 1.07,
+          "speedup_adapter_lc_vs_lc": 1.07,
+          "overhead_lc_pct": 0.0,
+          "overhead_li_pct": 292.0,
+          "overhead_ag_pct": 0.52
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.03433350138948299,
+            "min_ms": 0.03420800203457475,
+            "max_ms": 0.037333993532229215,
+            "mean_ms": 0.03449573341640644,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.035291999665787444,
+            "min_ms": 0.035208999179303646,
+            "max_ms": 0.06112499977461994,
+            "mean_ms": 0.03674719967724135,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.035333003324922174,
+            "min_ms": 0.0352080023731105,
+            "max_ms": 0.03687499702209607,
+            "mean_ms": 0.03542913376198461,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.04772899774252437,
+            "min_ms": 0.04712500231107697,
+            "max_ms": 0.07579199882457033,
+            "mean_ms": 0.05019169984734617,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.0353955001628492,
+            "min_ms": 0.03524999920045957,
+            "max_ms": 0.03695800114655867,
+            "mean_ms": 0.03550280040750901,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 0.97,
+          "speedup_adapter_lc_vs_lc": 0.97,
+          "overhead_lc_pct": 0.12,
+          "overhead_li_pct": 35.24,
+          "overhead_ag_pct": 0.29
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.3492500036372803,
+            "min_ms": 0.34250000317115337,
+            "max_ms": 0.3774580036406405,
+            "mean_ms": 0.3508140008004072,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.3484999979264103,
+            "min_ms": 0.3432080047787167,
+            "max_ms": 0.40158399497158825,
+            "mean_ms": 0.3583471989259124,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.3464999972493388,
+            "min_ms": 0.34462500480003655,
+            "max_ms": 0.3709579978021793,
+            "mean_ms": 0.35075273481197655,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.3582920035114512,
+            "min_ms": 0.3565419974620454,
+            "max_ms": 0.3941670001950115,
+            "mean_ms": 0.3635250677082998,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.35270900116302073,
+            "min_ms": 0.3449159994488582,
+            "max_ms": 0.36533399543259293,
+            "mean_ms": 0.35334159959650907,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 1.0,
+          "speedup_adapter_lc_vs_lc": 1.01,
+          "overhead_lc_pct": -0.57,
+          "overhead_li_pct": 2.81,
+          "overhead_ag_pct": 1.21
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 3.7533329959842376,
+            "min_ms": 3.691166995849926,
+            "max_ms": 4.171874999883585,
+            "mean_ms": 3.813130855892918,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 3.636207999079488,
+            "min_ms": 3.475833000265993,
+            "max_ms": 3.8162499986356124,
+            "mean_ms": 3.6137858582411093,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 3.554834001988638,
+            "min_ms": 3.5035410037380643,
+            "max_ms": 3.7616250046994537,
+            "mean_ms": 3.5845892884286252,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 3.6109579959884286,
+            "min_ms": 3.5693750032805838,
+            "max_ms": 3.8822919959784485,
+            "mean_ms": 3.6510237145453823,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 3.52316699718358,
+            "min_ms": 3.44549999863375,
+            "max_ms": 3.8257499982137233,
+            "mean_ms": 3.5885418557362363,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 1.03,
+          "speedup_adapter_lc_vs_lc": 1.06,
+          "overhead_lc_pct": -2.24,
+          "overhead_li_pct": -0.69,
+          "overhead_ag_pct": -3.11
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 51.011791998462286,
+            "min_ms": 50.974375000805594,
+            "max_ms": 51.79741600295529,
+            "mean_ms": 51.26119433407439,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 39.03049999644281,
+            "min_ms": 37.7135829985491,
+            "max_ms": 42.635792000510264,
+            "mean_ms": 39.793291665167395,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 37.71308300201781,
+            "min_ms": 37.458875005540904,
+            "max_ms": 38.18262500135461,
+            "mean_ms": 37.784861002971105,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 38.38437499507563,
+            "min_ms": 38.30658299557399,
+            "max_ms": 40.95604200119851,
+            "mean_ms": 39.21566666394938,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 38.00300000148127,
+            "min_ms": 37.94483299861895,
+            "max_ms": 38.04879100061953,
+            "mean_ms": 37.99887466690658,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 1.31,
+          "speedup_adapter_lc_vs_lc": 1.35,
+          "overhead_lc_pct": -3.38,
+          "overhead_li_pct": -1.66,
+          "overhead_ag_pct": -2.63
+        }
+      },
+      "emoji": {
+        "1": {
+          "langchain": {
+            "median_ms": 0.004125002305954695,
+            "min_ms": 0.004041001375298947,
+            "max_ms": 0.004499997885432094,
+            "mean_ms": 0.004147379077039659,
+            "iters": 50
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.0020410006982274354,
+            "min_ms": 0.0019999934011138976,
+            "max_ms": 0.002125001628883183,
+            "mean_ms": 0.002040740509983152,
+            "iters": 50
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.0020419975044205785,
+            "min_ms": 0.0019999934011138976,
+            "max_ms": 0.002125001628883183,
+            "mean_ms": 0.0020424806280061603,
+            "iters": 50
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.013666998711414635,
+            "min_ms": 0.01345800410490483,
+            "max_ms": 0.032000003557186574,
+            "mean_ms": 0.014113259385339916,
+            "iters": 50
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.0020419975044205785,
+            "min_ms": 0.001957996573764831,
+            "max_ms": 0.002125001628883183,
+            "mean_ms": 0.0020590602071024477,
+            "iters": 50
+          },
+          "speedup_direct_vs_lc": 2.02,
+          "speedup_adapter_lc_vs_lc": 2.02,
+          "overhead_lc_pct": 0.05,
+          "overhead_li_pct": 569.62,
+          "overhead_ag_pct": 0.05
+        },
+        "10": {
+          "langchain": {
+            "median_ms": 0.03033349639736116,
+            "min_ms": 0.030208000680431724,
+            "max_ms": 0.032208001357503235,
+            "mean_ms": 0.03052086685784161,
+            "iters": 30
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.014749995898455381,
+            "min_ms": 0.014541001291945577,
+            "max_ms": 0.015124998753890395,
+            "mean_ms": 0.014752699401772892,
+            "iters": 30
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.014790995919611305,
+            "min_ms": 0.014665994967799634,
+            "max_ms": 0.01491699367761612,
+            "mean_ms": 0.014772199695774665,
+            "iters": 30
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.026604502636473626,
+            "min_ms": 0.026374997105449438,
+            "max_ms": 0.027333000616636127,
+            "mean_ms": 0.026644400592582922,
+            "iters": 30
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.014500001270789653,
+            "min_ms": 0.014416997146327049,
+            "max_ms": 0.014666002243757248,
+            "mean_ms": 0.014506967272609472,
+            "iters": 30
+          },
+          "speedup_direct_vs_lc": 2.06,
+          "speedup_adapter_lc_vs_lc": 2.05,
+          "overhead_lc_pct": 0.28,
+          "overhead_li_pct": 80.37,
+          "overhead_ag_pct": -1.69
+        },
+        "100": {
+          "langchain": {
+            "median_ms": 0.29312499827938154,
+            "min_ms": 0.2916669982369058,
+            "max_ms": 0.3123339993180707,
+            "mean_ms": 0.2958944654286218,
+            "iters": 15
+          },
+          "fastchunk_direct": {
+            "median_ms": 0.13537500490201637,
+            "min_ms": 0.13516599574359134,
+            "max_ms": 0.1637919995118864,
+            "mean_ms": 0.13927759961613143,
+            "iters": 15
+          },
+          "fastchunk_langchain": {
+            "median_ms": 0.13783400208922103,
+            "min_ms": 0.13770900113740936,
+            "max_ms": 0.1511670052423142,
+            "mean_ms": 0.1391140006793042,
+            "iters": 15
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 0.15129199891816825,
+            "min_ms": 0.14745800581295043,
+            "max_ms": 0.17462499818066135,
+            "mean_ms": 0.15461940104917934,
+            "iters": 15
+          },
+          "fastchunk_agno": {
+            "median_ms": 0.14241699682315812,
+            "min_ms": 0.13508299889508635,
+            "max_ms": 0.18583400378702208,
+            "mean_ms": 0.1502973997655014,
+            "iters": 15
+          },
+          "speedup_direct_vs_lc": 2.17,
+          "speedup_adapter_lc_vs_lc": 2.13,
+          "overhead_lc_pct": 1.82,
+          "overhead_li_pct": 11.76,
+          "overhead_ag_pct": 5.2
+        },
+        "1000": {
+          "langchain": {
+            "median_ms": 3.3496249961899593,
+            "min_ms": 3.221208004106302,
+            "max_ms": 3.52083399775438,
+            "mean_ms": 3.3663691449744095,
+            "iters": 7
+          },
+          "fastchunk_direct": {
+            "median_ms": 1.3942089935881086,
+            "min_ms": 1.356959000986535,
+            "max_ms": 1.4266669968492351,
+            "mean_ms": 1.3902919984372732,
+            "iters": 7
+          },
+          "fastchunk_langchain": {
+            "median_ms": 1.3987080019433051,
+            "min_ms": 1.3456250017043203,
+            "max_ms": 1.4772079957765527,
+            "mean_ms": 1.4077024284883268,
+            "iters": 7
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 1.5069170040078461,
+            "min_ms": 1.3954579990240745,
+            "max_ms": 1.6094170059659518,
+            "mean_ms": 1.5077261435050917,
+            "iters": 7
+          },
+          "fastchunk_agno": {
+            "median_ms": 1.4234589980333112,
+            "min_ms": 1.3703340009669773,
+            "max_ms": 1.6383330003009178,
+            "mean_ms": 1.4536907141778752,
+            "iters": 7
+          },
+          "speedup_direct_vs_lc": 2.4,
+          "speedup_adapter_lc_vs_lc": 2.39,
+          "overhead_lc_pct": 0.32,
+          "overhead_li_pct": 8.08,
+          "overhead_ag_pct": 2.1
+        },
+        "10240": {
+          "langchain": {
+            "median_ms": 42.178458999842405,
+            "min_ms": 41.10308300005272,
+            "max_ms": 43.143292001332156,
+            "mean_ms": 42.141611333742425,
+            "iters": 3
+          },
+          "fastchunk_direct": {
+            "median_ms": 15.642582999134902,
+            "min_ms": 15.301208004530054,
+            "max_ms": 15.703833996667527,
+            "mean_ms": 15.549208333444161,
+            "iters": 3
+          },
+          "fastchunk_langchain": {
+            "median_ms": 15.522290996159427,
+            "min_ms": 15.498332999413833,
+            "max_ms": 15.653499998734333,
+            "mean_ms": 15.558041331435865,
+            "iters": 3
+          },
+          "fastchunk_llamaindex": {
+            "median_ms": 15.853333999984898,
+            "min_ms": 15.677333001804072,
+            "max_ms": 16.499707999173552,
+            "mean_ms": 16.01012500032084,
+            "iters": 3
+          },
+          "fastchunk_agno": {
+            "median_ms": 15.681708995543886,
+            "min_ms": 15.533249999862164,
+            "max_ms": 15.717542002676055,
+            "mean_ms": 15.644166999360701,
+            "iters": 3
+          },
+          "speedup_direct_vs_lc": 2.7,
+          "speedup_adapter_lc_vs_lc": 2.72,
+          "overhead_lc_pct": -0.77,
+          "overhead_li_pct": 1.35,
+          "overhead_ag_pct": 0.25
+        }
+      }
+    }
+  },
+  "end_to_end": {
+    "1": {
+      "langchain_create_documents": {
+        "median_ms": 0.007333997928071767,
+        "min_ms": 0.007208000170066953,
+        "max_ms": 0.008999995770864189,
+        "mean_ms": 0.007430800033034757,
+        "iters": 50
+      },
+      "fastchunk_langchain_create_documents": {
+        "median_ms": 0.005249996320344508,
+        "min_ms": 0.0051249953685328364,
+        "max_ms": 0.00541700137546286,
+        "mean_ms": 0.005254119460005313,
+        "iters": 50
+      },
+      "fastchunk_llamaindex_get_nodes": {
+        "median_ms": 0.06504149860120378,
+        "min_ms": 0.06220799696166068,
+        "max_ms": 0.08916699880501255,
+        "mean_ms": 0.06591583980480209,
+        "iters": 50
+      },
+      "fastchunk_agno_chunk": {
+        "median_ms": 0.004416495357872918,
+        "min_ms": 0.00429100327892229,
+        "max_ms": 0.004792003892362118,
+        "mean_ms": 0.0044324592454358935,
+        "iters": 50
+      },
+      "langchain_speedup": 1.4
+    },
+    "10": {
+      "langchain_create_documents": {
+        "median_ms": 0.04162500408710912,
+        "min_ms": 0.041250001231674105,
+        "max_ms": 0.042708001274149865,
+        "mean_ms": 0.041715267191951476,
+        "iters": 30
+      },
+      "fastchunk_langchain_create_documents": {
+        "median_ms": 0.03133300197077915,
+        "min_ms": 0.031000003218650818,
+        "max_ms": 0.03416699473746121,
+        "mean_ms": 0.031401433322268225,
+        "iters": 30
+      },
+      "fastchunk_llamaindex_get_nodes": {
+        "median_ms": 0.2821460002451204,
+        "min_ms": 0.2747920007095672,
+        "max_ms": 0.3454159959801473,
+        "mean_ms": 0.2882666662723447,
+        "iters": 30
+      },
+      "fastchunk_agno_chunk": {
+        "median_ms": 0.024979497538879514,
+        "min_ms": 0.02474999928381294,
+        "max_ms": 0.039874998037703335,
+        "mean_ms": 0.0254916997315983,
+        "iters": 30
+      },
+      "langchain_speedup": 1.33
+    },
+    "100": {
+      "langchain_create_documents": {
+        "median_ms": 0.3792079951381311,
+        "min_ms": 0.3726249997271225,
+        "max_ms": 0.4203749995213002,
+        "mean_ms": 0.38899999926798046,
+        "iters": 15
+      },
+      "fastchunk_langchain_create_documents": {
+        "median_ms": 0.28691699844785035,
+        "min_ms": 0.2842090034391731,
+        "max_ms": 0.3067920042667538,
+        "mean_ms": 0.29022240147848305,
+        "iters": 15
+      },
+      "fastchunk_llamaindex_get_nodes": {
+        "median_ms": 2.38845800049603,
+        "min_ms": 2.33575000311248,
+        "max_ms": 2.6483339970582165,
+        "mean_ms": 2.411019466429328,
+        "iters": 15
+      },
+      "fastchunk_agno_chunk": {
+        "median_ms": 0.2315419988008216,
+        "min_ms": 0.23062500258674845,
+        "max_ms": 0.26241599698551,
+        "mean_ms": 0.23413320062293982,
+        "iters": 15
+      },
+      "langchain_speedup": 1.32
+    },
+    "1000": {
+      "langchain_create_documents": {
+        "median_ms": 3.939458001696039,
+        "min_ms": 3.8525830022990704,
+        "max_ms": 4.102459002751857,
+        "mean_ms": 3.9364762882801836,
+        "iters": 7
+      },
+      "fastchunk_langchain_create_documents": {
+        "median_ms": 2.8971669962629676,
+        "min_ms": 2.8590829970198683,
+        "max_ms": 3.035791996808257,
+        "mean_ms": 2.9202679974592423,
+        "iters": 7
+      },
+      "fastchunk_llamaindex_get_nodes": {
+        "median_ms": 24.232374998973683,
+        "min_ms": 23.858291999204084,
+        "max_ms": 24.433332997432444,
+        "mean_ms": 24.20061899881278,
+        "iters": 7
+      },
+      "fastchunk_agno_chunk": {
+        "median_ms": 2.3344169967458583,
+        "min_ms": 2.3050000017974526,
+        "max_ms": 2.5885409995680675,
+        "mean_ms": 2.373214141698554,
+        "iters": 7
+      },
+      "langchain_speedup": 1.36
+    },
+    "10240": {
+      "langchain_create_documents": {
+        "median_ms": 43.2877500061295,
+        "min_ms": 43.04129099909915,
+        "max_ms": 43.369709004764445,
+        "mean_ms": 43.2329166699977,
+        "iters": 3
+      },
+      "fastchunk_langchain_create_documents": {
+        "median_ms": 31.34920799493557,
+        "min_ms": 31.286416997318156,
+        "max_ms": 31.39716599980602,
+        "mean_ms": 31.344263664019916,
+        "iters": 3
+      },
+      "fastchunk_llamaindex_get_nodes": {
+        "median_ms": 250.09391699859407,
+        "min_ms": 248.35558400081936,
+        "max_ms": 250.1216660020873,
+        "mean_ms": 249.52372233383358,
+        "iters": 3
+      },
+      "fastchunk_agno_chunk": {
+        "median_ms": 25.456125003984198,
+        "min_ms": 25.422207996598445,
+        "max_ms": 25.95866699994076,
+        "mean_ms": 25.612333333507802,
+        "iters": 3
+      },
+      "langchain_speedup": 1.38
+    }
+  },
+  "reference_splitters": {
+    "1": {
+      "llamaindex_sentence_splitter": {
+        "median_ms": 0.10089550050906837,
+        "min_ms": 0.09420800051884726,
+        "max_ms": 0.23795800370862707,
+        "mean_ms": 0.1107224400038831,
+        "iters": 50
+      },
+      "llamaindex_node_count": 1,
+      "agno_recursive_chunking": {
+        "median_ms": 0.05987499753246084,
+        "min_ms": 0.0597079997533001,
+        "max_ms": 0.07091600127751008,
+        "mean_ms": 0.06058157989173196,
+        "iters": 50
+      },
+      "agno_chunk_count": 2
+    },
+    "10": {
+      "llamaindex_sentence_splitter": {
+        "median_ms": 1.6219169956457336,
+        "min_ms": 1.567291998071596,
+        "max_ms": 1.94454200391192,
+        "mean_ms": 1.6379416335742765,
+        "iters": 30
+      },
+      "llamaindex_node_count": 2,
+      "agno_recursive_chunking": {
+        "median_ms": 0.693271002091933,
+        "min_ms": 0.676124996971339,
+        "max_ms": 0.7448750038747676,
+        "mean_ms": 0.6979332669288851,
+        "iters": 30
+      },
+      "agno_chunk_count": 21
+    },
+    "100": {
+      "llamaindex_sentence_splitter": {
+        "median_ms": 16.395375001593493,
+        "min_ms": 16.200790996663272,
+        "max_ms": 16.61045799846761,
+        "mean_ms": 16.403963732591365,
+        "iters": 15
+      },
+      "llamaindex_node_count": 21,
+      "agno_recursive_chunking": {
+        "median_ms": 7.22370800212957,
+        "min_ms": 7.109541002137121,
+        "max_ms": 7.671417006349657,
+        "mean_ms": 7.263127533951774,
+        "iters": 15
+      },
+      "agno_chunk_count": 224
+    },
+    "1000": {
+      "llamaindex_sentence_splitter": {
+        "median_ms": 161.77679199608974,
+        "min_ms": 161.25366699998267,
+        "max_ms": 163.7651669952902,
+        "mean_ms": 162.0495417134537,
+        "iters": 7
+      },
+      "llamaindex_node_count": 212,
+      "agno_recursive_chunking": {
+        "median_ms": 72.09299999522045,
+        "min_ms": 71.77958299871534,
+        "max_ms": 72.41470800363459,
+        "mean_ms": 72.10877357075722,
+        "iters": 7
+      },
+      "agno_chunk_count": 2254
+    },
+    "10240": {
+      "llamaindex_sentence_splitter": {
+        "median_ms": 1661.1876249953639,
+        "min_ms": 1659.871416995884,
+        "max_ms": 1760.6977910036221,
+        "mean_ms": 1693.9189443316234,
+        "iters": 3
+      },
+      "llamaindex_node_count": 2166,
+      "agno_recursive_chunking": {
+        "median_ms": 744.9304159963503,
+        "min_ms": 742.1462499987683,
+        "max_ms": 746.7388340010075,
+        "mean_ms": 744.6051666653754,
+        "iters": 3
+      },
+      "agno_chunk_count": 23095
+    }
+  }
+}
