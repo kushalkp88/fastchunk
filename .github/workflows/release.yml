@@ -43,22 +43,29 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ -n "${{ inputs.run_id }}" ]; then
-            echo "run_id=${{ inputs.run_id }}" >> "$GITHUB_OUTPUT"
-            echo "Using user-specified run_id: ${{ inputs.run_id }}"
-            exit 0
-          fi
+            RUN_ID="${{ inputs.run_id }}"
+            echo "Using user-specified run_id: $RUN_ID"
+            RUN_INFO=$(gh run view "$RUN_ID" --json workflowName,conclusion --jq '{name: .workflowName, status: .conclusion}')
+            RUN_WORKFLOW=$(echo "$RUN_INFO" | jq -r .name)
+            RUN_STATUS=$(echo "$RUN_INFO" | jq -r .status)
 
-          echo "Searching for Build Wheels workflow run for commit ${{ github.sha }}..."
-          RUN_ID=$(gh run list --workflow build-wheels.yml --commit "${{ github.sha }}" --status success --limit 1 --json databaseId --jq '.[0].databaseId')
+            if [ "$RUN_WORKFLOW" != "Build Wheels" ]; then
+              echo "::error::Run $RUN_ID is for workflow '$RUN_WORKFLOW', expected 'Build Wheels'!"
+              exit 1
+            fi
+            if [ "$RUN_STATUS" != "success" ]; then
+              echo "::error::Build Wheels run $RUN_ID has status '$RUN_STATUS', expected 'success'!"
+              exit 1
+            fi
+          else
+            echo "Searching for successful Build Wheels run for commit ${{ github.sha }}..."
+            RUN_ID=$(gh run list --workflow build-wheels.yml --commit "${{ github.sha }}" --status success --limit 1 --json databaseId --jq '.[0].databaseId')
 
-          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
-            echo "No run found for commit ${{ github.sha }}. Falling back to latest successful run on main..."
-            RUN_ID=$(gh run list --workflow build-wheels.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')
-          fi
-
-          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
-            echo "::error::Could not find a successful Build Wheels workflow run!"
-            exit 1
+            if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+              echo "::error::No successful Build Wheels workflow run found for commit ${{ github.sha }}!"
+              echo "::error::Provide an explicit run_id in workflow inputs or run Build Wheels first."
+              exit 1
+            fi
           fi
 
           echo "Found Build Wheels run ID: $RUN_ID"
@@ -138,25 +145,45 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ -n "${{ inputs.run_id }}" ]; then
-            echo "run_id=${{ inputs.run_id }}" >> "$GITHUB_OUTPUT"
-            echo "Using user-specified run_id: ${{ inputs.run_id }}"
-            exit 0
+            RUN_ID="${{ inputs.run_id }}"
+            echo "Using user-specified run_id: $RUN_ID"
+            RUN_INFO=$(gh run view "$RUN_ID" --json workflowName,conclusion,headSha --jq '{name: .workflowName, status: .conclusion, sha: .headSha}')
+            RUN_WORKFLOW=$(echo "$RUN_INFO" | jq -r .name)
+            RUN_STATUS=$(echo "$RUN_INFO" | jq -r .status)
+            RUN_SHA=$(echo "$RUN_INFO" | jq -r .sha)
+
+            if [ "$RUN_WORKFLOW" != "Build Wheels" ]; then
+              echo "::error::Run $RUN_ID is for workflow '$RUN_WORKFLOW', expected 'Build Wheels'!"
+              exit 1
+            fi
+            if [ "$RUN_STATUS" != "success" ]; then
+              echo "::error::Build Wheels run $RUN_ID has status '$RUN_STATUS', expected 'success'!"
+              exit 1
+            fi
+            if [ "$RUN_SHA" != "${{ github.sha }}" ]; then
+              echo "::error::Build Wheels run $RUN_ID was built from commit $RUN_SHA, but release is running on commit ${{ github.sha }}!"
+              exit 1
+            fi
+          else
+            echo "Searching for successful Build Wheels run for release commit ${{ github.sha }}..."
+            # Wait for in-progress Build Wheels run on this commit if just triggered
+            for i in $(seq 1 30); do
+              RUN_ID=$(gh run list --workflow build-wheels.yml --commit "${{ github.sha }}" --status success --limit 1 --json databaseId --jq '.[0].databaseId')
+              if [ -n "$RUN_ID" ] && [ "$RUN_ID" != "null" ]; then
+                break
+              fi
+              echo "Build Wheels run for commit ${{ github.sha }} not yet complete. Waiting 10s (attempt $i/30)..."
+              sleep 10
+            done
+
+            if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+              echo "::error::No successful Build Wheels workflow run found for release commit ${{ github.sha }}!"
+              echo "::error::Production release requires exact validated artifacts for this commit. Build Wheels must pass first."
+              exit 1
+            fi
           fi
 
-          echo "Searching for Build Wheels workflow run for commit ${{ github.sha }}..."
-          RUN_ID=$(gh run list --workflow build-wheels.yml --commit "${{ github.sha }}" --status success --limit 1 --json databaseId --jq '.[0].databaseId')
-
-          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
-            echo "No run found for commit ${{ github.sha }}. Falling back to latest successful run on main..."
-            RUN_ID=$(gh run list --workflow build-wheels.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')
-          fi
-
-          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
-            echo "::error::Could not find a successful Build Wheels workflow run!"
-            exit 1
-          fi
-
-          echo "Found Build Wheels run ID: $RUN_ID"
+          echo "Found validated Build Wheels run ID: $RUN_ID"
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
 
       - name: Download artifacts from Build Wheels
