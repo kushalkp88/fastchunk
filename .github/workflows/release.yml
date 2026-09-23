@@ -1,0 +1,206 @@
+name: Release
+
+'on':
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Publish target (testpypi or pypi)'
+        required: true
+        type: choice
+        default: 'testpypi'
+        options:
+          - testpypi
+          - pypi
+      run_id:
+        description: 'Build Wheels workflow run ID (optional; defaults to run for current commit)'
+        required: false
+        type: string
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish-testpypi:
+    name: Publish to TestPyPI
+    if: github.event_name == 'workflow_dispatch' && inputs.target == 'testpypi'
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/fastchunk
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
+
+    steps:
+      - name: Determine Build Wheels Run ID
+        id: find-run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "${{ inputs.run_id }}" ]; then
+            echo "run_id=${{ inputs.run_id }}" >> "$GITHUB_OUTPUT"
+            echo "Using user-specified run_id: ${{ inputs.run_id }}"
+            exit 0
+          fi
+
+          echo "Searching for Build Wheels workflow run for commit ${{ github.sha }}..."
+          RUN_ID=$(gh run list --workflow build-wheels.yml --commit "${{ github.sha }}" --status success --limit 1 --json databaseId --jq '.[0].databaseId')
+
+          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+            echo "No run found for commit ${{ github.sha }}. Falling back to latest successful run on main..."
+            RUN_ID=$(gh run list --workflow build-wheels.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')
+          fi
+
+          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+            echo "::error::Could not find a successful Build Wheels workflow run!"
+            exit 1
+          fi
+
+          echo "Found Build Wheels run ID: $RUN_ID"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Download artifacts from Build Wheels
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ steps.find-run.outputs.run_id }}
+          github-token: ${{ github.token }}
+          path: dist
+          merge-multiple: true
+
+      - name: Ensure flat dist directory structure
+        run: |
+          find dist/ -mindepth 2 -type f -exec mv -t dist/ {} + 2>/dev/null || \
+          find dist/ -mindepth 2 -type f -exec sh -c 'for f; do mv "$f" dist/; done' _ {} +
+          find dist/ -mindepth 1 -type d -empty -delete
+
+      - name: Validate distribution packages
+        run: |
+          echo "=== Downloaded Artifacts in dist/ ==="
+          ls -la dist/
+
+          SDIST_COUNT=$(ls dist/*.tar.gz 2>/dev/null | wc -l)
+          if [ "$SDIST_COUNT" -lt 1 ]; then
+            echo "::error::Source distribution (.tar.gz) is missing!"
+            exit 1
+          fi
+
+          WHEEL_COUNT=$(ls dist/*.whl 2>/dev/null | wc -l)
+          if [ "$WHEEL_COUNT" -lt 3 ]; then
+            echo "::error::Expected at least 3 wheels (Linux, macOS, Windows), found $WHEEL_COUNT!"
+            exit 1
+          fi
+
+          echo "Artifact check passed: $SDIST_COUNT sdist, $WHEEL_COUNT wheels."
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+
+      - name: Validate package metadata with twine
+        run: uvx twine check dist/*
+
+      - name: Publish to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          packages-dir: dist/
+
+  publish-pypi:
+    name: Publish to PyPI (Production)
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.target == 'pypi')
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/fastchunk
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
+
+    steps:
+      - name: Verify release tag
+        run: |
+          if [[ "${{ github.ref }}" != refs/tags/v* ]]; then
+            echo "::error::Production publishing is only allowed from a version tag (e.g. refs/tags/v0.1.0). Current ref: ${{ github.ref }}"
+            exit 1
+          fi
+          echo "Publishing release for tag: ${{ github.ref_name }}"
+
+      - name: Determine Build Wheels Run ID
+        id: find-run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "${{ inputs.run_id }}" ]; then
+            echo "run_id=${{ inputs.run_id }}" >> "$GITHUB_OUTPUT"
+            echo "Using user-specified run_id: ${{ inputs.run_id }}"
+            exit 0
+          fi
+
+          echo "Searching for Build Wheels workflow run for commit ${{ github.sha }}..."
+          RUN_ID=$(gh run list --workflow build-wheels.yml --commit "${{ github.sha }}" --status success --limit 1 --json databaseId --jq '.[0].databaseId')
+
+          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+            echo "No run found for commit ${{ github.sha }}. Falling back to latest successful run on main..."
+            RUN_ID=$(gh run list --workflow build-wheels.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')
+          fi
+
+          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+            echo "::error::Could not find a successful Build Wheels workflow run!"
+            exit 1
+          fi
+
+          echo "Found Build Wheels run ID: $RUN_ID"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Download artifacts from Build Wheels
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ steps.find-run.outputs.run_id }}
+          github-token: ${{ github.token }}
+          path: dist
+          merge-multiple: true
+
+      - name: Ensure flat dist directory structure
+        run: |
+          find dist/ -mindepth 2 -type f -exec mv -t dist/ {} + 2>/dev/null || \
+          find dist/ -mindepth 2 -type f -exec sh -c 'for f; do mv "$f" dist/; done' _ {} +
+          find dist/ -mindepth 1 -type d -empty -delete
+
+      - name: Validate distribution packages
+        run: |
+          echo "=== Downloaded Artifacts in dist/ ==="
+          ls -la dist/
+
+          SDIST_COUNT=$(ls dist/*.tar.gz 2>/dev/null | wc -l)
+          if [ "$SDIST_COUNT" -lt 1 ]; then
+            echo "::error::Source distribution (.tar.gz) is missing!"
+            exit 1
+          fi
+
+          WHEEL_COUNT=$(ls dist/*.whl 2>/dev/null | wc -l)
+          if [ "$WHEEL_COUNT" -lt 3 ]; then
+            echo "::error::Expected at least 3 wheels (Linux, macOS, Windows), found $WHEEL_COUNT!"
+            exit 1
+          fi
+
+          echo "Artifact check passed: $SDIST_COUNT sdist, $WHEEL_COUNT wheels."
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+
+      - name: Validate package metadata with twine
+        run: uvx twine check dist/*
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
